@@ -1,0 +1,25 @@
+{
+  "name": "GPRandomizer",
+  "version": "1.0.0",
+  "description": "GPRandomizer (C) Lenrok",
+  "scripts": {
+    "setup": "cp node_modules/purecss/build/pure-min.css css/ && cp node_modules/jquery/dist/jquery.min.js js/",
+    "generate": "node 7thgrid.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sopra/GPRandomizer.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sopra/GPRandomizer/issues"
+  },
+  "dependencies": {
+    "jquery": "^3.3.0",
+    "purecss": "^1.0.0",
+    "rework": "*",
+    "rework-pure-grids": "*"
+  },
+  "devDependencies": {
+  }
+}
