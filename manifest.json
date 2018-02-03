@@ -2,7 +2,7 @@
     "name": "GaiaProject Setup Randomizer",
     "short_name": "GPRandomizer",
     "start_url": "/",
-    "scope": "/",
+    "scope": "https://sopra.github.io/GPRandomizer/",
     "description": "randomizer for GaiaProject Setup",
     "display": "standalone",
     "icons": [
