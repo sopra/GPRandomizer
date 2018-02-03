@@ -1,0 +1,25 @@
+{
+    "name": "GaiaProject Setup Randomizer",
+    "short_name": "GPRandomizer",
+    "start_url": "/",
+    "scope": "/",
+    "description": "randomizer for GaiaProject Setup",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "./image/icon-1x.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "./image/icon-2x.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "./image/icon-4x.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ]
+}
