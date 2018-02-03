@@ -7,17 +7,17 @@
     "display": "standalone",
     "icons": [
         {
-            "src": "./image/icon-1x.png",
+            "src": "./image/GPRandomizer_48px.png",
             "type": "image/png",
             "sizes": "48x48"
         },
         {
-            "src": "./image/icon-2x.png",
+            "src": "./image/GPRandomizer_96px.png",
             "type": "image/png",
             "sizes": "96x96"
         },
         {
-            "src": "./image/icon-4x.png",
+            "src": "./image/GPRandomizer_192px.png",
             "type": "image/png",
             "sizes": "192x192"
         }
