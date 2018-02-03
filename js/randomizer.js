@@ -80,6 +80,7 @@ $(window).on("load", function() {
   const BASTECH_NUM = 9;
   const ROUND_NUM = 6;
   const FINAL_NUM = 2;
+  const BOOSTER_PADDING_NUM = 6;
 
   // array shuffle method
   const shuffle = function (array) {
@@ -195,12 +196,13 @@ $(window).on("load", function() {
     var boosterdiv = $('div#booster');
     var players = $("select#pNumbers").val();
     var rndBoosterNum = Number(players) + 3;
+    var sidePadding = BOOSTER_PADDING_NUM / Number(players);
     var rndboosterlist = shuffle(ROUNDBOOSTERS);
     var booster = boosterdiv.empty();
     var blist = "";
     for (i = 0; i < rndBoosterNum; i++) {
       blist += '<div class="booster pure-u-1-' + rndBoosterNum + '">';
-      blist += '<div style="padding: 1vw;">';
+      blist += '<div style="padding: 1vw ' + sidePadding + 'vw;">';
       blist += '<img class="pure-img" src="' + rndboosterlist[i] + '">';
       blist += '</div>';
       blist += '</div>';
