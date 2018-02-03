@@ -230,6 +230,17 @@ $(window).on("load", function() {
     });
   });
 
+  //
+  //
+  //
+  $('button#hide').on('click', function(event) {
+    $('div.header').hide(200);
+    $('#GPBoard').on('click', function() {
+      $('div.header').show(200);
+      $('#GPBoard').off('click');
+    });
+  });
+
   setup(true);
 
   //
