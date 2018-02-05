@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/pure-7th-grid.css">
     <script>
       if (navigator.serviceWorker) {
-        navigator.serviceWorker.register('./js/service-worker.js', { scope: "."}).then(function(register) {
+        navigator.serviceWorker.register('./serviceworker.js', { scope: "."}).then(function(register) {
           register.update();
         });
       }
