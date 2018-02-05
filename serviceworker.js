@@ -100,6 +100,7 @@ function onFetch(event) {
             console.log('Found response in cache: ', response);
             return response;
           }
+          return fetch(event.request);
         }
       ).catch(function(error) {
         console.log('Error fetch in handler:', error);
