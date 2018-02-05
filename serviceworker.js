@@ -75,10 +75,6 @@ const STATIC_FILES = [
 ];
 
 //
-importScripts('./js/sw-offline-google-analytics.prod.v0.0.25.js');
-goog.offlineGoogleAnalytics.initialize();
-
-//
 //
 //
 function onInstall(event) {
@@ -104,7 +100,7 @@ function onFetch(event) {
             console.log('Found response in cache: ', response);
             return response;
           }
-          return fetch(event.request, {mode: 'no-cors'});
+          return fetch(event.request);
         }
       ).catch(function(error) {
         console.log('Error fetch in handler:', error);
