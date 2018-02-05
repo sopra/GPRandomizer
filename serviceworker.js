@@ -79,10 +79,12 @@ const STATIC_FILES = [
 //
 function onInstall(event) {
   event.waitUntil(
-    caches.open(CACHE_KEY).then(function(cache) {
-      cache.addAll(STATIC_FILES);
-      console.log('Success to store all static data in cache.');
-    }
+    caches.open(CACHE_KEY).then(
+      function(cache) {
+        cache.addAll(STATIC_FILES);
+        console.log('Success to store all static data in cache.');
+      }
+    )
   );
 }
 
