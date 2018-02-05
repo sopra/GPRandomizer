@@ -21,5 +21,7 @@
     "rework-pure-grids": "*"
   },
   "devDependencies": {
+    "eslint": "^4.17.0",
+    "sw-offline-google-analytics": "0.0.25"
   }
 }
