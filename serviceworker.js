@@ -2,12 +2,20 @@
 //
 //
 
+const APPLICATION_NAME = 'GPRandomizer';
 const VERSION = "1";
-const CACHE_KEY = "GPRandomizer" + VERSION;
-const URL = location.protocol + '//' + location.hostname;
+const CACHE_KEY = APPLICATION_NAME + VERSION;
+const APPLICATION_DIR = '/' + APPLICATION_NAME;
+const URL = location.protocol + '//' +
+  location.hostname +
+  (location.port ? ':' + location.port : '') +
+  APPLICATION_DIR;
 const STATIC_FILES = [
+  URL + '/',
   URL + '/js/jquery.min.js',
   URL + '/js/randomizer.js',
+  URL + '/css/pure-7th-grid.css',
+  URL + '/css/pure-min.css',
   URL + '/pic/ADVfedP.png',
   URL + '/pic/ADVfedV.png',
   URL + '/pic/ADVgai.png',
@@ -69,27 +77,41 @@ const STATIC_FILES = [
 //
 //
 //
-self.addEventListener('install', event => {
+function onInstall(event) {
   event.waitUntil(
-    caches.open(CACHE_KEY).then(cache => {
-      return Promise.all(
-        STATIC_FILES.map(url => {
-          return fetch(new Request(url, { cache: 'no-cache', mode: 'no-cors' })).then(response => {
-            return cache.put(url, response);
-          });
-        })
-      );
-    })
+    caches.open(CACHE_KEY).then(function(cache) {
+      cache.addAll(STATIC_FILES);
+      console.log('Success to store all static data in cache.');
+    }
   );
-});
+}
 
 //
 //
 //
-self.addEventListener('fetch', event => {
+function onFetch(event) {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+    caches.open(CACHE_KEY).then(function(cache) {
+      return cache.match(event.request).then(
+        function(response) {
+          if (response) {
+            console.log('Found response in cache: ', response);
+            return response;
+          }
+        }
+      ).catch(function(error) {
+        console.log('Error fetch in handler:', error);
+      })
     })
   );
-});
+}
+
+//
+//
+//
+function onActivate(event) {
+}
+
+self.addEventListener('install', onInstall);
+self.addEventListener('fetch', onFetch);
+self.addEventListener('activate', onActivate);
