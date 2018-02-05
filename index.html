@@ -9,6 +9,13 @@
     <link rel="apple-touch-icon" href="./image/GPRandomizer_192px.png">
     <link rel="stylesheet" href="./css/pure-min.css">
     <link rel="stylesheet" href="./css/pure-7th-grid.css">
+    <script>
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('./serviceworker.js', { scope: "."}).then(function(register) {
+          register.update();
+        });
+      }
+    </script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/randomizer.js"></script>
     <style>
