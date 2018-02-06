@@ -16,8 +16,6 @@
         });
       }
     </script>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/randomizer.js"></script>
     <style>
 td    {
   padding: 1vw;
@@ -59,6 +57,9 @@ table#GPBoard {
   padding-top: 1vw;
   padding-bottom: 1vw;
 }
+.finalScore {
+  background-color: #04833a;
+}
 .pure-img {
   display: inline;
   vertical-align: middle;
@@ -98,45 +99,45 @@ table#GPBoard {
     <table id="GPBoard">
       <tr>
         <td rowspan=2 class="terraformTech">
-          <img class="pure-img" id="FED" src=>
+          <img class="pure-img" id="FED" src="">
         </td>
         <td class="terraformTech">
-          <img class="pure-img" id="ADV0" src=>
+          <img class="pure-img" id="ADV0" src="">
         </td>
         <td class="navigationTech">
-          <img class="pure-img" id="ADV1" src=>
+          <img class="pure-img" id="ADV1" src="">
         </td>
         <td class="aiTech">
-          <img class="pure-img" id="ADV2" src=>
+          <img class="pure-img" id="ADV2" src="">
         </td>
         <td class="gaiaformTech">
-          <img class="pure-img" id="ADV3" src=>
+          <img class="pure-img" id="ADV3" src="">
         </td>
         <td class="economyTech">
-          <img class="pure-img" id="ADV4" src=>
+          <img class="pure-img" id="ADV4" src="">
         </td>
         <td class="scienceTech">
-          <img class="pure-img" id="ADV5" src=>
+          <img class="pure-img" id="ADV5" src="">
         </td>
       </tr>
       <tr>
         <td class="terraformTech">
-          <img class="pure-img" id="BAS0" src=pic/TECpia.png>
+          <img class="pure-img" id="BAS0" src="pic/TECpia.png">
         </td>
         <td class="navigationTech">
-          <img class="pure-img" id="BAS1" src=pic/TECqic.png>
+          <img class="pure-img" id="BAS1" src="pic/TECqic.png">
         </td>
         <td class="aiTech">
-          <img class="pure-img" id="BAS2" src=pic/TECpow.png>
+          <img class="pure-img" id="BAS2" src="pic/TECpow.png">
         </td>
         <td class="gaiaformTech">
-          <img class="pure-img" id="BAS3" src=pic/TECtyp.png>
+          <img class="pure-img" id="BAS3" src="pic/TECtyp.png">
         </td>
         <td class="economyTech">
-          <img class="pure-img" id="BAS4" src=pic/TECgai.png>
+          <img class="pure-img" id="BAS4" src="pic/TECgai.png">
         </td>
         <td class="scienceTech">
-          <img class="pure-img" id="BAS5" src=pic/TECore.png>
+          <img class="pure-img" id="BAS5" src="pic/TECore.png">
         </td>
       </tr>
       <tr>
@@ -144,41 +145,41 @@ table#GPBoard {
           <p style="font-size: 2vw;"><a href="https://boardgamegeek.com/thread/1903179/gaia-project-setup-randomizer-gprandomizer-availab">GPrandomizer v1.4<br>by Lenrok</a></p>
         </td>
         <td colspan="2" class="freeTech">
-          <img class="pure-img" id="BAS6" src=pic/TECcre.png>
+          <img class="pure-img" id="BAS6" src="pic/TECcre.png">
         </td>
         <td colspan="2" class="freeTech">
-          <img class="pure-img" id="BAS7" src=pic/TECvps.png>
+          <img class="pure-img" id="BAS7" src="pic/TECvps.png">
         </td>
         <td colspan="2" class="freeTech">
-          <img class="pure-img" id="BAS8" src=pic/TECknw.png>
+          <img class="pure-img" id="BAS8" src="pic/TECknw.png">
         </td>
       </tr>
       <tr>
         <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND0" src=pic/RNDstp.png>
+          <img class="pure-img" id="RND0" src="pic/RNDstp.png">
         </td>
         <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND1" src=pic/RNDtrs3.png>
+          <img class="pure-img" id="RND1" src="pic/RNDtrs3.png">
         </td>
         <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND2" src=pic/RNDpia.png>
+          <img class="pure-img" id="RND2" src="pic/RNDpia.png">
         </td>
         <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND3" src=pic/RNDfed.png>
+          <img class="pure-img" id="RND3" src="pic/RNDfed.png">
         </td>
         <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND4" src=pic/RNDmin.png>
+          <img class="pure-img" id="RND4" src="pic/RNDmin.png">
         </td>
         <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND5" src=pic/RNDtrs4.png>
+          <img class="pure-img" id="RND5" src="pic/RNDtrs4.png">
         </td>
-        <td style=background-color:#04833a>
-          <img class="pure-img" id="FIN0" src=pic/FINfed.png>
+        <td class="finalScore">
+          <img class="pure-img" id="FIN0" src="pic/FINfed.png">
         </td>
       </tr>
       <tr>
-        <td style=background-color:#04833a>
-          <img class="pure-img" id="FIN1" src=pic/FINgai.png>
+        <td class="finalScore">
+          <img class="pure-img" id="FIN1" src="pic/FINgai.png">
         </td>
       </tr>
     </table>
@@ -205,5 +206,7 @@ table#GPBoard {
         <img class="pure-img" src="pic/BOOmin.png">
       </div>
     </div>
+    <script src="./js/jquery.min.js"></script>
+    <script async src="./js/randomizer.js"></script>
   </body>
 </html>

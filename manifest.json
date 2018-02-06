@@ -20,6 +20,11 @@
             "src": "./image/GPRandomizer_192px.png",
             "type": "image/png",
             "sizes": "192x192"
+        },
+        {
+            "src": "./image/GPRandomizer_512px.png",
+            "type": "image/png",
+            "sizes": "512x512"
         }
     ]
 }

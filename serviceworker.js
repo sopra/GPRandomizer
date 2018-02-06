@@ -3,7 +3,7 @@
 //
 
 const APPLICATION_NAME = 'GPRandomizer';
-const VERSION = "1";
+const VERSION = "2";
 const CACHE_KEY = APPLICATION_NAME + VERSION;
 const APPLICATION_DIR = '/' + APPLICATION_NAME;
 const URL = location.protocol + '//' +
@@ -113,6 +113,15 @@ function onFetch(event) {
 //
 //
 function onActivate(event) {
+  event.waitUntil(
+    caches.keys().then(function(keys) {
+      keys.filter(function(key) {
+        return 0 !== key.indexOf(CACHE_KEY);
+      }).map(function(key) {
+        caches["delete"](key);
+      });
+    })
+  );
 }
 
 self.addEventListener('install', onInstall);
