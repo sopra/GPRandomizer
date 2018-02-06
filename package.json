@@ -4,7 +4,8 @@
   "description": "GPRandomizer (C) Lenrok",
   "scripts": {
     "setup": "cp node_modules/purecss/build/pure-min.css css/ && cp node_modules/jquery/dist/jquery.min.js js/",
-    "generate": "node 7thgrid.js"
+    "generate": "node 7thgrid.js",
+    "server": "cd .. && GPRandomizer/node_modules/.bin/serve"
   },
   "repository": {
     "type": "git",
@@ -16,10 +17,11 @@
   },
   "dependencies": {
     "jquery": "^3.3.0",
-    "purecss": "^1.0.0",
-    "rework": "*",
-    "rework-pure-grids": "*"
+    "purecss": "^1.0.0"
   },
   "devDependencies": {
+    "rework": "*",
+    "rework-pure-grids": "*",
+    "serve": "^6.4.9"
   }
 }
