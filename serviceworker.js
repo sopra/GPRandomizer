@@ -113,6 +113,15 @@ function onFetch(event) {
 //
 //
 function onActivate(event) {
+  event.waitUntil(
+    caches.keys().then(function(keys) {
+      keys.filter(function(key) {
+        return 0 !== key.indexOf(CACHE_KEY);
+      }).map(function(key) {
+        caches["delete"](key);
+      });
+    })
+  );
 }
 
 self.addEventListener('install', onInstall);
