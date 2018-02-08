@@ -4,6 +4,8 @@
     "start_url": "/GPRandomizer/",
     "scope": "https://sopra.github.io/GPRandomizer/",
     "description": "randomizer for GaiaProject Setup",
+    "background_color": "#FFF",
+    "theme_color": "#000",
     "display": "standalone",
     "icons": [
         {

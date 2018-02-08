@@ -4,7 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000">
+    <meta name="apple-mobile-web-app-title" content="GPRandomizer">
+    <meta name="description" content="Randomizer for GaiaProject">
+    <meta name="keywords" content="randomizer gaiaproject boardgame">
     <title>GPRandomizer</title>
+    <link rel="canonical" href="https://sopra.github.io/GPRandomizer/">
+    <link rel="favicon" href="./favicon.ico">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./image/GPRandomizer_192px.png">
     <link rel="stylesheet" href="./css/pure-min.css">
@@ -64,10 +70,13 @@ table#GPBoard {
   display: inline;
   vertical-align: middle;
 }
+.halfwidth {
+  padding: 1vw 8%;
+}
     </style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21068290-3"></script>
-<script>
+<script >
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -76,6 +85,7 @@ table#GPBoard {
 </script>
   </head>
   <body>
+    <head>
     <div class="header pure-g">
       <form class="pure-form pure-form-aligned">
       <div class="pure-u">
@@ -96,6 +106,8 @@ table#GPBoard {
       </div>
       </form>
     </div>
+    </head>
+    <main>
     <table id="GPBoard">
       <tr>
         <td rowspan=2 class="terraformTech">
@@ -122,90 +134,91 @@ table#GPBoard {
       </tr>
       <tr>
         <td class="terraformTech">
-          <img class="pure-img" id="BAS0" src="pic/TECpia.png">
+          <img class="pure-img" id="BAS0" src="">
         </td>
         <td class="navigationTech">
-          <img class="pure-img" id="BAS1" src="pic/TECqic.png">
+          <img class="pure-img" id="BAS1" src="">
         </td>
         <td class="aiTech">
-          <img class="pure-img" id="BAS2" src="pic/TECpow.png">
+          <img class="pure-img" id="BAS2" src="">
         </td>
         <td class="gaiaformTech">
-          <img class="pure-img" id="BAS3" src="pic/TECtyp.png">
+          <img class="pure-img" id="BAS3" src="">
         </td>
         <td class="economyTech">
-          <img class="pure-img" id="BAS4" src="pic/TECgai.png">
+          <img class="pure-img" id="BAS4" src="">
         </td>
         <td class="scienceTech">
-          <img class="pure-img" id="BAS5" src="pic/TECore.png">
+          <img class="pure-img" id="BAS5" src="">
         </td>
       </tr>
       <tr>
         <td class="freeTech">
           <p style="font-size: 2vw;"><a href="https://boardgamegeek.com/thread/1903179/gaia-project-setup-randomizer-gprandomizer-availab">GPrandomizer v1.4<br>by Lenrok</a></p>
         </td>
-        <td colspan="2" class="freeTech">
-          <img class="pure-img" id="BAS6" src="pic/TECcre.png">
+        <td colspan="2" class="freeTech halfwidth">
+          <img class="pure-img" id="BAS6" src="">
         </td>
-        <td colspan="2" class="freeTech">
-          <img class="pure-img" id="BAS7" src="pic/TECvps.png">
+        <td colspan="2" class="freeTech halfwidth">
+          <img class="pure-img" id="BAS7" src="">
         </td>
-        <td colspan="2" class="freeTech">
-          <img class="pure-img" id="BAS8" src="pic/TECknw.png">
-        </td>
-      </tr>
-      <tr>
-        <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND0" src="pic/RNDstp.png">
-        </td>
-        <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND1" src="pic/RNDtrs3.png">
-        </td>
-        <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND2" src="pic/RNDpia.png">
-        </td>
-        <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND3" src="pic/RNDfed.png">
-        </td>
-        <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND4" src="pic/RNDmin.png">
-        </td>
-        <td rowspan=2 class="roundBG">
-          <img class="pure-img" id="RND5" src="pic/RNDtrs4.png">
-        </td>
-        <td class="finalScore">
-          <img class="pure-img" id="FIN0" src="pic/FINfed.png">
+        <td colspan="2" class="freeTech halfwidth">
+          <img class="pure-img" id="BAS8" src="">
         </td>
       </tr>
       <tr>
+        <td rowspan=2 class="roundBG">
+          <img class="pure-img" id="RND0" src="">
+        </td>
+        <td rowspan=2 class="roundBG">
+          <img class="pure-img" id="RND1" src="">
+        </td>
+        <td rowspan=2 class="roundBG">
+          <img class="pure-img" id="RND2" src="">
+        </td>
+        <td rowspan=2 class="roundBG">
+          <img class="pure-img" id="RND3" src="">
+        </td>
+        <td rowspan=2 class="roundBG">
+          <img class="pure-img" id="RND4" src="">
+        </td>
+        <td rowspan=2 class="roundBG">
+          <img class="pure-img" id="RND5" src="">
+        </td>
         <td class="finalScore">
-          <img class="pure-img" id="FIN1" src="pic/FINgai.png">
+          <img class="pure-img" id="FIN0" src="">
+        </td>
+      </tr>
+      <tr>
+        <td class="finalScore">
+          <img class="pure-img" id="FIN1" src="">
         </td>
       </tr>
     </table>
     <div id="booster" class="pure-g">
       <div class="booster pure-u-1-7">
-        <img class="pure-img" src="pic/BOOknw.png">
+        <img class="pure-img" src="">
       </div>
       <div class="booster pure-u-1-7">
-        <img class="pure-img" src="pic/BOOnav.png">
+        <img class="pure-img" src="">
       </div>
       <div class="booster pure-u-1-7">
-        <img class="pure-img" src="pic/BOOqic.png">
+        <img class="pure-img" src="">
       </div>
       <div class="booster pure-u-1-7">
-        <img class="pure-img" src="pic/BOOpwt.png">
+        <img class="pure-img" src="">
       </div>
       <div class="booster pure-u-1-7">
-        <img class="pure-img" src="pic/BOOgai.png">
+        <img class="pure-img" src="">
       </div>
       <div class="booster pure-u-1-7">
-        <img class="pure-img" src="pic/BOOter.png">
+        <img class="pure-img" src="">
       </div>
       <div class="booster pure-u-1-7">
-        <img class="pure-img" src="pic/BOOmin.png">
+        <img class="pure-img" src="">
       </div>
     </div>
+    </main>
     <script src="./js/jquery.min.js"></script>
     <script async src="./js/randomizer.js"></script>
   </body>

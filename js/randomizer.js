@@ -232,31 +232,11 @@ $(window).on("load", function() {
   //
   $('button#hide').on('click', function(event) {
     $('div.header').hide(200);
-    $('#GPBoard').on('click', function() {
+    $('main').on('click', function() {
       $('div.header').show(200);
-      $('#GPBoard').off('click');
+      $('main').off('click');
     });
   });
 
   setup(true);
-
-  //
-  //
-  //
-  function fixsize() {
-    for (var i = 6; i < 9; i++) {
-      $('img#BAS'+i).height(
-        $('img#BAS0').height()
-      );
-    }
-  }
-
-  fixsize();
-
-  //
-  // resize時の画像縮小
-  //
-  $(window).on('resize', function(event) {
-    fixsize();
-  });
 });
