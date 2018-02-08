@@ -1,79 +1,80 @@
 // vim: fenc=utf-8 et ts=4 sts=4 sw=4
 $(window).on("load", function() {
-  var doc = document;
+  
+  const IMG_SUFFIX = navigator.userAgent.match(/Chrome|Opera|iPhone.*Safari/) ? ".webp" : ".png";
 
   const FEDERATIONS = [
-    "pic/FEDcre.png",
-    //    "pic/FEDgle.png",
-    "pic/FEDknw.png",
-    "pic/FEDore.png",
-    "pic/FEDpwt.png",
-    "pic/FEDqic.png",
-    "pic/FEDvps.png"
+    "pic/FEDcre" + IMG_SUFFIX,
+    //    "pic/FEDgle" + IMG_SUFFIX,
+    "pic/FEDknw" + IMG_SUFFIX,
+    "pic/FEDore" + IMG_SUFFIX,
+    "pic/FEDpwt" + IMG_SUFFIX,
+    "pic/FEDqic" + IMG_SUFFIX,
+    "pic/FEDvps" + IMG_SUFFIX
   ];
 
   const ROUNDSCORES = [
-    "pic/RNDfed.png",
-    "pic/RNDgai3.png",
-    "pic/RNDgai4.png",
-    "pic/RNDmin.png",
-    "pic/RNDpia.png",
-    "pic/RNDstp.png",
-    "pic/RNDter.png",
-    "pic/RNDtrs3.png",
-    "pic/RNDtrs4.png"
+    "pic/RNDfed" + IMG_SUFFIX,
+    "pic/RNDgai3" + IMG_SUFFIX,
+    "pic/RNDgai4" + IMG_SUFFIX,
+    "pic/RNDmin" + IMG_SUFFIX,
+    "pic/RNDpia" + IMG_SUFFIX,
+    "pic/RNDstp" + IMG_SUFFIX,
+    "pic/RNDter" + IMG_SUFFIX,
+    "pic/RNDtrs3" + IMG_SUFFIX,
+    "pic/RNDtrs4" + IMG_SUFFIX
   ];
 
   const BASICTECHS = [
-    "pic/TECcre.png",
-    "pic/TECgai.png",
-    "pic/TECknw.png",
-    "pic/TECore.png",
-    "pic/TECpia.png",
-    "pic/TECpow.png",
-    "pic/TECqic.png",
-    "pic/TECtyp.png",
-    "pic/TECvps.png"
+    "pic/TECcre" + IMG_SUFFIX,
+    "pic/TECgai" + IMG_SUFFIX,
+    "pic/TECknw" + IMG_SUFFIX,
+    "pic/TECore" + IMG_SUFFIX,
+    "pic/TECpia" + IMG_SUFFIX,
+    "pic/TECpow" + IMG_SUFFIX,
+    "pic/TECqic" + IMG_SUFFIX,
+    "pic/TECtyp" + IMG_SUFFIX,
+    "pic/TECvps" + IMG_SUFFIX
   ];
 
   const ADVANCEDTECHS = [
-    "pic/ADVfedP.png",
-    "pic/ADVfedV.png",
-    "pic/ADVgai.png",
-    "pic/ADVknw.png",
-    "pic/ADVlab.png",
-    "pic/ADVminB.png",
-    "pic/ADVminV.png",
-    "pic/ADVore.png",
-    "pic/ADVqic.png",
-    "pic/ADVsecO.png",
-    "pic/ADVsecV.png",
-    "pic/ADVstp.png",
-    "pic/ADVtrsB.png",
-    "pic/ADVtrsV.png",
-    "pic/ADVtyp.png"
+    "pic/ADVfedP" + IMG_SUFFIX,
+    "pic/ADVfedV" + IMG_SUFFIX,
+    "pic/ADVgai" + IMG_SUFFIX,
+    "pic/ADVknw" + IMG_SUFFIX,
+    "pic/ADVlab" + IMG_SUFFIX,
+    "pic/ADVminB" + IMG_SUFFIX,
+    "pic/ADVminV" + IMG_SUFFIX,
+    "pic/ADVore" + IMG_SUFFIX,
+    "pic/ADVqic" + IMG_SUFFIX,
+    "pic/ADVsecO" + IMG_SUFFIX,
+    "pic/ADVsecV" + IMG_SUFFIX,
+    "pic/ADVstp" + IMG_SUFFIX,
+    "pic/ADVtrsB" + IMG_SUFFIX,
+    "pic/ADVtrsV" + IMG_SUFFIX,
+    "pic/ADVtyp" + IMG_SUFFIX
   ];
 
   const ROUNDBOOSTERS = [
-    "pic/BOOgai.png",
-    "pic/BOOknw.png",
-    "pic/BOOlab.png",
-    "pic/BOOmin.png",
-    "pic/BOOnav.png",
-    "pic/BOOpia.png",
-    "pic/BOOpwt.png",
-    "pic/BOOqic.png",
-    "pic/BOOter.png",
-    "pic/BOOtrs.png"
+    "pic/BOOgai" + IMG_SUFFIX,
+    "pic/BOOknw" + IMG_SUFFIX,
+    "pic/BOOlab" + IMG_SUFFIX,
+    "pic/BOOmin" + IMG_SUFFIX,
+    "pic/BOOnav" + IMG_SUFFIX,
+    "pic/BOOpia" + IMG_SUFFIX,
+    "pic/BOOpwt" + IMG_SUFFIX,
+    "pic/BOOqic" + IMG_SUFFIX,
+    "pic/BOOter" + IMG_SUFFIX,
+    "pic/BOOtrs" + IMG_SUFFIX
   ];
 
   const FINALSCORES = [
-    "pic/FINbld.png",
-    "pic/FINfed.png",
-    "pic/FINgai.png",
-    "pic/FINsat.png",
-    "pic/FINsec.png",
-    "pic/FINtyp.png"
+    "pic/FINbld" + IMG_SUFFIX,
+    "pic/FINfed" + IMG_SUFFIX,
+    "pic/FINgai" + IMG_SUFFIX,
+    "pic/FINsat" + IMG_SUFFIX,
+    "pic/FINsec" + IMG_SUFFIX,
+    "pic/FINtyp" + IMG_SUFFIX
   ];
 
   const ADVTECH_NUM = 6;
@@ -83,7 +84,7 @@ $(window).on("load", function() {
   const BOOSTER_PADDING_NUM = 6;
 
   // array shuffle method
-  const shuffle = function (array) {
+  function shuffle(array) {
     var n = array.length, t, i;
     while (n) {
       i = Math.floor(Math.random() * n--);
@@ -92,12 +93,12 @@ $(window).on("load", function() {
       array[i] = t;
     }
     return array;
-  };
+  }
 
   //
   // setup federation;
   //
-  var setupFederation = function(arg) {
+  function setupFederation(arg) {
     var fed = 0;
     if (!arg) {
       fed = Math.floor(Math.random() * FEDERATIONS.length);
@@ -106,32 +107,32 @@ $(window).on("load", function() {
     }
 
     $('img#FED').attr('src', FEDERATIONS[fed]);
-  };
+  }
 
   //
   // setup advanced Technology;
   //
-  var setupAdvTech = function(args) {
+  function setupAdvTech(args) {
     var advlist = shuffle(ADVANCEDTECHS);
-    for (i = 0; i < ADVTECH_NUM; i++) {
+    for (var i = 0; i < ADVTECH_NUM; i++) {
       $('img#ADV' + i).attr('src', advlist[i]);
     }
-  };
+  }
 
   //
   // setup basic Tech
   //
-  var setupBasicTech = function(args) {
+  function setupBasicTech(args) {
     var baslist = shuffle(BASICTECHS);
-    for (i = 0; i < BASTECH_NUM; i++) {
+    for (var i = 0; i < BASTECH_NUM; i++) {
       $('img#BAS' + i).attr('src', baslist[i]);
     }
-  };
+  }
 
   //
   //
   //
-  var parseHashbang = function(hashbang_str) {
+  function parseHashbang(hashbang_str) {
     var hashes = hashbang_str.split('&');
     var vars = {};
 
@@ -151,21 +152,54 @@ $(window).on("load", function() {
   //
   // setup RoundScore
   //
-  var setupRoundScore = function(args) {
+  function setupRoundScore(args) {
+    var rndlist = shuffle(ROUNDSCORES);
+    for (var i = 0; i < ROUND_NUM; i++) {
+      $('img#RND' + i).attr('src', rndlist[i]);
+    }
+  }
+
+  //
+  // setup FinalScore
+  //
+  function setupFinalScore(args) {
+    var finlist = shuffle(FINALSCORES);
+    for (var i = 0; i < FINAL_NUM; i++) {
+      $('img#FIN' + i).attr('src', finlist[i]);
+    }
+  }
+
+  //
+  // setup Booster
+  //
+  function setupBooster(args) {
+    var boosterdiv = $('div#booster');
+    var players = $("select#pNumbers").val();
+    var rndBoosterNum = Number(players) + 3;
+    var sidePadding = BOOSTER_PADDING_NUM / Number(players);
+    var rndboosterlist = shuffle(ROUNDBOOSTERS);
+    boosterdiv.empty();
+    var blist = "";
+    for (var i = 0; i < rndBoosterNum; i++) {
+      blist += '<div class="booster pure-u-1-' + rndBoosterNum + '">';
+      blist += '<div style="padding: 1vw ' + sidePadding + 'vw;">';
+      blist += '<img class="pure-img" src="' + rndboosterlist[i] + '">';
+      blist += '</div>';
+      blist += '</div>';
+    }
+    boosterdiv.html(blist);
   }
 
   //
   // setup function
   //
-  var setup = function (hashbang) {
-
+  function setup(hashbang) {
     var args = {};
     if (hashbang == true) {
       (function () {
         const aURL = window.location.href;
         if (aURL.indexOf('#!') >= 0) {
           args = parseHashbang(aURL.slice(aURL.indexOf('#!') + 2));
-          console.log(args);
         }
       }());
     }
@@ -181,55 +215,16 @@ $(window).on("load", function() {
 
     // setup round-score
     setupRoundScore(args);
-    var rndlist = shuffle(ROUNDSCORES);
-    for (i = 0; i < ROUND_NUM; i++) {
-      $('img#RND' + i).attr('src', rndlist[i]);
-    }
 
     // setup final-score
-    var finlist = shuffle(FINALSCORES);
-    for (i = 0; i < FINAL_NUM; i++) {
-      $('img#FIN' + i).attr('src', finlist[i]);
-    }
+    setupFinalScore(args);
 
     // setup round-booster
-    var boosterdiv = $('div#booster');
-    var players = $("select#pNumbers").val();
-    var rndBoosterNum = Number(players) + 3;
-    var sidePadding = BOOSTER_PADDING_NUM / Number(players);
-    var rndboosterlist = shuffle(ROUNDBOOSTERS);
-    var booster = boosterdiv.empty();
-    var blist = "";
-    for (i = 0; i < rndBoosterNum; i++) {
-      blist += '<div class="booster pure-u-1-' + rndBoosterNum + '">';
-      blist += '<div style="padding: 1vw ' + sidePadding + 'vw;">';
-      blist += '<img class="pure-img" src="' + rndboosterlist[i] + '">';
-      blist += '</div>';
-      blist += '</div>';
-    }
-    boosterdiv.html(blist);
-  };
+    setupBooster(args);
+  }
 
   $('button#setup').on('click', function() {
     setup();
-  });
-
-  //
-  // capture ボタン準備
-  //
-  $('button#capture').on('click', function(event) {
-    var board = $('#GPBoard')[0];
-    html2canvas(board).then(function(canvas) {
-      var data = canvas.toDataURL();
-      $('#forClipboard').html('<img class="pure-img" src=' + data);
-      $('#forClipboard').css('display', 'block');
-
-      var range = document.createRange();
-      range.selectNode( $('#forClipboard > img')[0] );
-      window.getSelection().addRange(range);
-      doc.execCommand('copy');
-      $('#forClipboard').css('display', 'none');
-    });
   });
 
   //
@@ -237,32 +232,11 @@ $(window).on("load", function() {
   //
   $('button#hide').on('click', function(event) {
     $('div.header').hide(200);
-    $('#GPBoard').on('click', function() {
+    $('main').on('click', function() {
       $('div.header').show(200);
-      $('#GPBoard').off('click');
+      $('main').off('click');
     });
   });
 
   setup(true);
-
-  //
-  //
-  //
-  var fixsize = function() {
-    for (var i = 6; i < 9; i++) {
-      $('img#BAS'+i).height(
-        $('img#BAS0').height()
-      );
-    }
-  };
-
-  fixsize();
-
-  //
-  // resize時の画像縮小
-  //
-  $(window).on('resize', function(event) {
-    fixsize();
-  });
-
 });

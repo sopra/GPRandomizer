@@ -5,7 +5,7 @@
   "scripts": {
     "setup": "cp node_modules/purecss/build/pure-min.css css/ && cp node_modules/jquery/dist/jquery.min.js js/",
     "generate": "node 7thgrid.js",
-    "server": "cd .. && GPRandomizer/node_modules/.bin/serve"
+    "start": "cd .. && GPRandomizer/node_modules/.bin/serve"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
     "purecss": "^1.0.0"
   },
   "devDependencies": {
+    "eslint": "^4.17.0",
+    "gulp-uglify": "^3.0.0",
     "rework": "*",
     "rework-pure-grids": "*",
     "serve": "^6.4.9"
