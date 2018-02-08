@@ -1,7 +1,7 @@
 // vim: fenc=utf-8 et ts=4 sts=4 sw=4
 $(window).on("load", function() {
   
-  const IMG_SUFFIX = navigator.userAgent.match(/Chrome|Opera|iPhone.*Safari/) ? ".webp" : ".png";
+  const IMG_SUFFIX = navigator.userAgent.match(/Chrome|Opera/) ? ".webp" : ".png";
 
   const FEDERATIONS = [
     "pic/FEDcre" + IMG_SUFFIX,

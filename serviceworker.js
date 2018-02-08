@@ -3,7 +3,7 @@
 //
 
 const APPLICATION_NAME = 'GPRandomizer';
-const VERSION = "3";
+const VERSION = "4";
 const CACHE_KEY = APPLICATION_NAME + VERSION;
 const APPLICATION_DIR = '/' + APPLICATION_NAME;
 const URL = location.protocol + '//' +
@@ -143,7 +143,7 @@ function onInstall(event) {
     caches.open(CACHE_KEY).then(
       function(cache) {
         var files = STATIC_FILES;
-        if (navigator.userAgent.match(/Chrome|Opera|iPhone.*Safari/)) {
+        if (navigator.userAgent.match(/Chrome|Opera/)) {
           files = files.concat(WEBP_FILES);
         } else {
           files = files.concat(PNG_FILES);
