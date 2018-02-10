@@ -33,10 +33,21 @@
     }
     div.header {
       display: flex;
-      font-size: 2vw;
+      font-size: 1.5em;
       font-family: sans-serif;
+      margin: 5px;
+    }
+    label#pNumLabel {
+      font-size: inherit;
+      vertical-align: middle;
+    }
+    select#pNumbers {
+      font-size: inherit;
+      vertical-align: middle;
+      border: 1px;
     }
     button {
+      font-size: inherit;
       font-weight: bold;
       padding: 0.5vw;
       vertical-align: middle;
@@ -127,10 +138,10 @@
   <menu>
     <div class="header">
       <div>
-        <label for="pNumbers" style="display:inline; vertical-align:middle;"><span>Players</span></label>
+        <label id="pNumLabel" for="pNumbers"><span>Players</span></label>
       </div>
       <div>
-        <select id="pNumbers" name="pNumbers" style="font-size:1.2em;">
+        <select id="pNumbers" name="pNumbers">
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4" selected>4</option>
