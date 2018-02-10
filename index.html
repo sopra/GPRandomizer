@@ -26,9 +26,20 @@
     }
     menu {
       margin: 0;
+      padding: 0 2vw;
     }
     main {
       margin: 0;
+    }
+    div.header {
+      display: flex;
+      font-size: 2vw;
+      font-family: sans-serif;
+    }
+    button {
+      font-weight: bold;
+      padding: 0.5vw;
+      vertical-align: middle;
     }
     td {
       padding: 1vw;
@@ -116,10 +127,10 @@
   <menu>
     <div class="header">
       <div>
-        <label for="pNumbers">Players</label>
+        <label for="pNumbers" style="display:inline; vertical-align:middle;"><span>Players</span></label>
       </div>
       <div>
-        <select id="pNumbers" name="pNumbers">
+        <select id="pNumbers" name="pNumbers" style="font-size:1.2em;">
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4" selected>4</option>
