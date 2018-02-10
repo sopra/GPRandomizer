@@ -1,0 +1,32 @@
+{
+    "name": "GaiaProject Setup Randomizer",
+    "short_name": "GPRandomizer",
+    "start_url": "/GPRandomizer/",
+    "scope": "https://sopra.github.io/GPRandomizer/",
+    "description": "randomizer for GaiaProject Setup",
+    "background_color": "#FFF",
+    "theme_color": "#000",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "./image/GPRandomizer_48px.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "./image/GPRandomizer_96px.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "./image/GPRandomizer_192px.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "./image/GPRandomizer_512px.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
