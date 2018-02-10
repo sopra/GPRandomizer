@@ -1,6 +1,6 @@
 window.addEventListener('load', function() {
 
-  const IMG_SUFFIX = navigator.userAgent.match(/Chrome|Opera/) ? ".webp" : ".png";
+  const IMG_SUFFIX = navigator.userAgent.match(/Chrome|Opera/) ? ".webp" : "-min.png";
 
   const FEDERATIONS = [
     "pic/FEDcre" + IMG_SUFFIX,
