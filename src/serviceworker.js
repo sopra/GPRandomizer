@@ -3,7 +3,7 @@
 //
 
 const APPLICATION_NAME = 'GPRandomizer';
-const VERSION = "7";
+const VERSION = "8";
 const CACHE_KEY = APPLICATION_NAME + VERSION;
 const APPLICATION_DIR = '/' + APPLICATION_NAME;
 const URL = location.protocol + '//' +
@@ -12,10 +12,7 @@ const URL = location.protocol + '//' +
   APPLICATION_DIR;
 const STATIC_FILES = [
   URL + '/',
-  URL + '/js/jquery.min.js',
   URL + '/js/randomizer.js',
-  URL + '/css/pure-7th-grid.css',
-  URL + '/css/pure-min.css',
 ];
 
 const PNG_FILES = [
