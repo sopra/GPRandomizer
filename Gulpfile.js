@@ -1,6 +1,9 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglifyes'),
     plumber = require('gulp-plumber'),
+    ejs = require('gulp-ejs'),
+    execSync = require('child_process').execSync,
+    os = require('os'),
     uglify_option = {
         mangle: true,
         ecma: 6
@@ -14,8 +17,11 @@ gulp.task('randomizer-minify', function() {
 });
 
 gulp.task('serviceworker-minify', function() {
+    var revision = execSync('git rev-parse HEAD').toString().replace(os.EOL, '');
+
     return gulp.src('./src/serviceworker.js')
         .pipe(plumber())
+        .pipe(ejs({ "revision": revision }))
         .pipe(uglify(uglify_option))
         .pipe(gulp.dest('./docs/'));
 });
