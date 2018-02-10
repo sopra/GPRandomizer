@@ -3,7 +3,7 @@
 //
 
 const APPLICATION_NAME = 'GPRandomizer';
-const VERSION = "8";
+const VERSION = "9";
 const CACHE_KEY = APPLICATION_NAME + VERSION;
 const APPLICATION_DIR = '/' + APPLICATION_NAME;
 const URL = location.protocol + '//' +
