@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "GPRandomizer (C) Lenrok",
   "scripts": {
-    "setup": "cp node_modules/purecss/build/pure-min.css css/ && cp node_modules/jquery/dist/jquery.min.js js/",
-    "generate": "node 7thgrid.js",
     "start": "cd .. && GPRandomizer/node_modules/.bin/serve",
-    "gulp": "gulp"
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
@@ -22,6 +20,7 @@
     "eslint": "^4.17.0",
     "gulp": "^3.9.1",
     "gulp-ejs": "^3.1.1",
+    "gulp-htmlmin": "^4.0.0",
     "gulp-plumber": "^1.2.0",
     "gulp-uglifyes": "^0.1.3",
     "serve": "^6.4.9"
