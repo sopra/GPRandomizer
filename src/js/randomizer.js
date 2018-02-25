@@ -209,7 +209,6 @@ window.addEventListener('load', function() {
     let boosterdiv = document.getElementById('booster');
     let players = document.getElementById('pNumbers').value;
     let rndBoosterNum = Number(players) + 3;
-    let sidePadding = Math.floor(BOOSTER_PADDING_NUM / Number(players));
     let rndboosterlist = shuffle(ROUNDBOOSTERS);
     if (boosterdiv.childElementCount != rndBoosterNum) {
       Array.prototype.forEach.call(
