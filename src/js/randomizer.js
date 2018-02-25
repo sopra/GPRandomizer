@@ -311,12 +311,11 @@ window.addEventListener('load', function() {
   //
   //
   document.getElementById('hide').addEventListener('click', function() {
-    document.getElementsByTagName('menu')[0].
-      style.setProperty('display', 'none');
+    document.getElementsByTagName('menu')[0].style.display = 'none';
+    document.getElementById('mapGenMenu').style.display = 'none';
     var l = document.getElementsByTagName('main')[0].addEventListener('click', function() {
-      document.getElementsByTagName('menu')[0].style.setProperty(
-        'display', 'block'
-      );
+      document.getElementsByTagName('menu')[0].style.display = 'block';
+      document.getElementById('mapGenMenu').style.display = 'block';
       document.getElementsByTagName('main')[0].removeEventListener('click', l);
     });
   });
