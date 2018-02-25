@@ -326,6 +326,22 @@ window.addEventListener('load', function() {
     generateRandomMap(pNum);
   });
 
+  function rotateImage() {
+    let deg = this.style.transform.match(/rotate\(([0-9]+)deg\)/);
+    let newdeg = 60;
+    if (deg) {
+      newdeg = Number(deg[1]) + 60;
+    }
+    this.style.transform = 'rotate(' + newdeg + 'deg)';
+  }
+
+  Array.prototype.forEach.call(
+    document.querySelectorAll('div.mapItem > img'),
+    function(image) {
+      image.addEventListener('click', rotateImage);
+    }
+  )
+
   let resizeQueue = null;
   let resizeWait = 300;
   window.addEventListener('resize', function() {
