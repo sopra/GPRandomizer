@@ -4,7 +4,8 @@
   "description": "GPRandomizer (C) Lenrok",
   "scripts": {
     "start": "cd .. && GPRandomizer/node_modules/.bin/serve",
-    "build": "gulp"
+    "build": "gulp",
+    "lint": "eslint src/serviceworker.js src/js/randomizer.js"
   },
   "repository": {
     "type": "git",
