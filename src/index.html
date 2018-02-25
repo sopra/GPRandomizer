@@ -11,7 +11,7 @@
   <meta name="google-site-verification" content="mykakMvldbIY_i0UoY6rUr4MW7K8AzykJ2LihxZAfGI" />
   <title>GPRandomizer</title>
   <link rel="canonical" href="https://sopra.github.io/GPRandomizer/">
-  <link rel="favicon" href="./favicon.ico">
+  <link rel="favicon" href="/GPRandomizer/favicon.ico">
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./image/GPRandomizer_192px.png">
   <script>
@@ -103,8 +103,18 @@
     .booster {
       background-color: #8b939d;
       text-align: center;
-      padding-top: 1vw;
-      padding-bottom: 1vw;
+    }
+
+    .booster4er {
+      padding: 1vw 1.5vw;
+    }
+
+    .booster3er {
+      padding: 1vw 2vw;
+    }
+
+    .booster2er {
+      padding: 1vw 4vw;
     }
 
     .finalScore {
@@ -123,6 +133,53 @@
 
     .halfwidth {
       padding: 1vw 8%;
+    }
+
+    #map {
+      margin: 2px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    #mapTile0 {
+      grid-column: 4 / span 5;
+      grid-row: 1 / span 10;
+    }
+    #mapTile1 {
+      grid-column: 9 / span 5;
+      grid-row: 2 / span 10;
+    }
+    #mapTile2 {
+      grid-column: 14 / span 5;
+      grid-row: 3 / span 10;
+    }
+    #mapTile3 {
+      grid-column: 1 / span 5;
+      grid-row: 9 / span 10;
+    }
+    #mapTile4 {
+      grid-column: 6 / span 5;
+      grid-row: 10 / span 10;
+    }
+    #mapTile5 {
+      grid-column: 11 / span 5;
+      grid-row: 11 / span 10;
+    }
+    #mapTile6 {
+      grid-column: 16 / span 5;
+      grid-row: 12 / span 10;
+    }
+    #mapTile7 {
+      grid-column: 3 / span 5;
+      grid-row: 18 / span 10;
+    }
+    #mapTile8 {
+      grid-column: 8 / span 5;
+      grid-row: 19 / span 10;
+    }
+    #mapTile9 {
+      grid-column: 13 / span 5;
+      grid-row: 20 / span 10;
     }
   </style>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -157,6 +214,7 @@
     </div>
   </menu>
   <main>
+    <section>
     <table id="GPBoard">
       <tr>
         <td rowspan=2 class="terraformTech">
@@ -248,7 +306,68 @@
       </tr>
     </table>
     <div id="booster">
+      <div class="booster">
+        <img id="BST0" src="">
+      </div>
+      <div class="booster">
+        <img id="BST1" src="">
+      </div>
+      <div class="booster">
+        <img id="BST2" src="">
+      </div>
+      <div class="booster">
+        <img id="BST3" src="">
+      </div>
+      <div class="booster">
+        <img id="BST4" src="">
+      </div>
+      <div class="booster">
+        <img id="BST5" src="">
+      </div>
+      <div class="booster">
+        <img id="BST6" src="">
+      </div>
     </div>
+    </section>
+    <section>
+    <div>
+      <p style="text-align: center">
+        <button id="mapGen" type="button">Random Map Generate<br>(experimental & heavy)</button>
+      </p>
+      <div id="map">
+        <div id="mapTile0" class="mapItem">
+          <img id="map0" src="">
+        </div>
+        <div id="mapTile1" class="mapItem">
+          <img id="map1" src="">
+        </div>
+        <div id="mapTile2" class="mapItem">
+          <img id="map2" src="">
+        </div>
+        <div id="mapTile3" class="mapItem">
+          <img id="map3" src="">
+        </div>
+        <div id="mapTile4" class="mapItem">
+          <img id="map4" src="">
+        </div>
+        <div id="mapTile5" class="mapItem">
+          <img id="map5" src="">
+        </div>
+        <div id="mapTile6" class="mapItem">
+          <img id="map6" src="">
+        </div>
+        <div id="mapTile7" class="mapItem">
+          <img id="map7" src="">
+        </div>
+        <div id="mapTile8" class="mapItem">
+          <img id="map8" src="">
+        </div>
+        <div id="mapTile9" class="mapItem">
+          <img id="map9" src="">
+        </div>
+      </div>
+    </div>
+    </section>
   </main>
   <script async src="./js/randomizer.js"></script>
 </body>

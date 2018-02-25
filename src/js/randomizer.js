@@ -76,6 +76,40 @@ window.addEventListener('load', function() {
     "pic/FINtyp" + IMG_SUFFIX
   ];
 
+  const SPACESECTORS = {
+    '4': [
+      'pic/1' + IMG_SUFFIX,
+      'pic/2' + IMG_SUFFIX,
+      'pic/3' + IMG_SUFFIX,
+      'pic/4' + IMG_SUFFIX,
+      'pic/5' + IMG_SUFFIX,
+      'pic/6' + IMG_SUFFIX,
+      'pic/7' + IMG_SUFFIX,
+      'pic/8' + IMG_SUFFIX,
+      'pic/9' + IMG_SUFFIX,
+      'pic/10' + IMG_SUFFIX
+    ],
+    '3': [
+      'pic/1' + IMG_SUFFIX,
+      'pic/2' + IMG_SUFFIX,
+      'pic/3' + IMG_SUFFIX,
+      'pic/4' + IMG_SUFFIX,
+      'pic/5' + IMG_SUFFIX,
+      'pic/6' + IMG_SUFFIX,
+      'pic/7' + IMG_SUFFIX,
+      'pic/8' + IMG_SUFFIX,
+    ],
+    '2': [
+      'pic/1' + IMG_SUFFIX,
+      'pic/2' + IMG_SUFFIX,
+      'pic/3' + IMG_SUFFIX,
+      'pic/4' + IMG_SUFFIX,
+      'pic/5_' + IMG_SUFFIX,
+      'pic/6_' + IMG_SUFFIX,
+      'pic/7_' + IMG_SUFFIX,
+    ]
+  };
+
   const ADVTECH_NUM = 6;
   const BASTECH_NUM = 9;
   const ROUND_NUM = 6;
@@ -172,22 +206,66 @@ window.addEventListener('load', function() {
   // setup Booster
   //
   function setupBooster(args) {
-    var boosterdiv = document.getElementById('booster');
-    var players = document.getElementById('pNumbers').value;
-    var rndBoosterNum = Number(players) + 3;
-    var sidePadding = BOOSTER_PADDING_NUM / Number(players);
-    var rndboosterlist = shuffle(ROUNDBOOSTERS);
+    let boosterdiv = document.getElementById('booster');
+    let players = document.getElementById('pNumbers').value;
+    let rndBoosterNum = Number(players) + 3;
+    let sidePadding = Math.floor(BOOSTER_PADDING_NUM / Number(players));
+    let rndboosterlist = shuffle(ROUNDBOOSTERS);
+    if (boosterdiv.childElementCount != rndBoosterNum) {
+      Array.prototype.forEach.call(
+        document.getElementsByClassName('booster'),
+        function(element) {
+          element.style.display = 'none';
+        }
+      );
+    }
     boosterdiv.style.setProperty(
       'grid-template-columns', "1fr ".repeat(rndBoosterNum));
-    var blist = "";
     for (var i = 0; i < rndBoosterNum; i++) {
-      blist += '<div class="booster">';
-      blist += '<div style="padding: 1vw ' + sidePadding + 'vw;">';
-      blist += '<img src="' + rndboosterlist[i] + '">';
-      blist += '</div>';
-      blist += '</div>';
+      let bItem = document.getElementById('BST' + i);
+      bItem.setAttribute('src', rndboosterlist[i]);
+      bItem.parentElement.style.display = 'block';
+      Array.prototype.forEach.call(bItem.parentElement.classList, function(item) {
+        if (5 < item.lastIndexOf('er')) {
+          bItem.parentElement.classList.remove(item);
+        }
+      });
+      bItem.parentElement.classList.add('booster' + players + 'er');
     }
-    boosterdiv.innerHTML = blist;
+  }
+
+  //
+  // map vertical grid resize
+  //
+  function resizeMapVerticalGridLength() {
+    let wid = window.innerWidth;
+    let unit = (wid / 20) / 2;
+    document.getElementById('map').style.gridTemplateRows = (unit + 'px ').repeat(30);
+  }
+
+  //
+  // generate random map
+  //
+  function generateRandomMap(players) {
+    resizeMapVerticalGridLength();
+    if (2 == Number(players)) {
+      document.getElementById('mapTile9').style.display = 'none';
+    }
+    let tiles = shuffle(SPACESECTORS[players]);
+    let i = 0;
+    Array.prototype.forEach.call(tiles, (tile) => {
+      if (players == 3 && (i == 2 || i == 6)) {
+        document.getElementById('mapTile' + i).style.display = 'none';
+        i++;
+      } else if (players == 2 && (i == 2 || i == 6)) {
+        document.getElementById('mapTile' + i).style.display = 'none';
+        i++;
+      }
+      let degree = Math.floor(Math.random() * 6) * 60;
+      document.getElementById('map' + i).setAttribute('src', tile);
+      document.getElementById('map' + i).style.transform = 'rotate(' + degree + 'deg)';
+      i++;
+    });
   }
 
   //
@@ -242,6 +320,20 @@ window.addEventListener('load', function() {
       );
       document.getElementsByTagName('main')[0].removeEventListener('click', l);
     });
+  });
+
+  document.getElementById('mapGen').addEventListener('click', function() {
+    let pNum = document.getElementById('pNumbers').value;
+    generateRandomMap(pNum);
+  });
+
+  let resizeQueue = null;
+  let resizeWait = 300;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeQueue);
+    resizeQueue = setTimeout(function() {
+      resizeMapVerticalGridLength();
+    }, resizeWait);
   });
 
   setup(true);
