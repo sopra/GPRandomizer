@@ -1,6 +1,7 @@
 window.addEventListener('load', function() {
 
-  const IMG_SUFFIX = navigator.userAgent.match(/Chrome|Opera/) ? ".webp" : "-min.png";
+  const UA = navigator.userAgent;
+  const IMG_SUFFIX = UA.match(/Chrome|Opera/) && UA.indexOf('Edge') == -1 ? ".webp" : "-min.png";
 
   const FEDERATIONS = [
     "pic/FEDcre" + IMG_SUFFIX,
@@ -219,10 +220,15 @@ window.addEventListener('load', function() {
       );
     }
     boosterdiv.style.setProperty(
-      'grid-template-columns', "1fr ".repeat(rndBoosterNum));
+      'grid-template-columns', "1fr ".repeat(rndBoosterNum)
+    );
+    boosterdiv.style.setProperty(
+      '-ms-grid-columns', "1fr ".repeat(rndBoosterNum)
+    );
     for (var i = 0; i < rndBoosterNum; i++) {
       let bItem = document.getElementById('BST' + i);
       bItem.setAttribute('src', rndboosterlist[i]);
+      bItem.parentElement.style.setProperty('-ms-grid-column', i + 1);
       bItem.parentElement.style.display = 'block';
       Array.prototype.forEach.call(bItem.parentElement.classList, function(item) {
         if (5 < item.lastIndexOf('er')) {
@@ -237,9 +243,11 @@ window.addEventListener('load', function() {
   // map vertical grid resize
   //
   function resizeMapVerticalGridLength() {
+    let map = document.getElementById('map');
     let wid = window.innerWidth;
     let unit = (wid / 20) / 2;
-    document.getElementById('map').style.gridTemplateRows = (unit + 'px ').repeat(30);
+    map.style.gridTemplateRows = (unit + 'px ').repeat(30);
+    map.style.setProperty('-ms-grid-rows', (unit + 'px').repeat(30));
   }
 
   //
