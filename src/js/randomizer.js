@@ -253,14 +253,12 @@ window.addEventListener('load', function() {
     let tiles = shuffle(SPACESECTORS[players]);
     let i = 0;
     Array.prototype.forEach.call(tiles, (tile) => {
-      if (players == 3 && (i == 2 || i == 6)) {
-        document.getElementById('mapTile' + i).style.display = 'none';
-        i++;
-      } else if (players == 2 && (i == 2 || i == 6)) {
+      if (players < 4 && (i == 2 || i == 6)) {
         document.getElementById('mapTile' + i).style.display = 'none';
         i++;
       }
       let degree = Math.floor(Math.random() * 6) * 60;
+      document.getElementById('mapTile' + i).style.display = 'block';
       document.getElementById('map' + i).setAttribute('src', tile);
       document.getElementById('map' + i).style.transform = 'rotate(' + degree + 'deg)';
       i++;
