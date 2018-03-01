@@ -115,7 +115,6 @@ window.addEventListener('load', function() {
   const BASTECH_NUM = 9;
   const ROUND_NUM = 6;
   const FINAL_NUM = 2;
-  const BOOSTER_PADDING_NUM = 6;
 
   // array shuffle method
   function shuffle(array) {
@@ -273,7 +272,7 @@ window.addEventListener('load', function() {
     let tiles = shuffle(SPACESECTORS[players]);
     Array.prototype.forEach.call(
       document.querySelectorAll('[data-map]'),
-      function(element, index, arrayList) {
+      function(element, index) {
         let parentDiv = element.parentElement;
         parentDiv.className = 'mapItem mapTile' + index + '-' + players + 'er';
         let parentCss = parentDiv.currentStyle ||
@@ -286,7 +285,7 @@ window.addEventListener('load', function() {
         element.setAttribute('src', tiles.shift());
         element.style.transform = 'rotate(' + degree + 'deg)';
       }
-    )
+    );
   }
 
   //
@@ -334,7 +333,7 @@ window.addEventListener('load', function() {
   //
   document.getElementById('hide').addEventListener('click', function() {
     let menu = document.getElementsByTagName('menu')[0],
-        mapMenu = document.getElementById('mapGenMenu');
+      mapMenu = document.getElementById('mapGenMenu');
     menu.style.display = 'none';
     mapMenu.style.display = 'none';
     var l = document.getElementsByTagName('main')[0].addEventListener('click', function() {
@@ -366,7 +365,7 @@ window.addEventListener('load', function() {
     function(image) {
       image.addEventListener('click', rotateImage);
     }
-  )
+  );
 
   let resizeQueue = null;
   let resizeWait = 300;
