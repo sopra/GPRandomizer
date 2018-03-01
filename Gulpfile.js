@@ -3,6 +3,8 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     ejs = require('gulp-ejs'),
     htmlmin = require('gulp-htmlmin'),
+    cleancss = require('gulp-clean-css'),
+    autoprefix = require('gulp-autoprefixer'),
     execSync = require('child_process').execSync,
     os = require('os'),
     uglify_option = {
@@ -38,6 +40,13 @@ gulp.task('html-minify', function() {
         .pipe(gulp.dest('./docs/'));
 });
 
+gulp.task('css-minify', function() {
+    gulp.src('./src/css/*.css')
+      .pipe(autoprefix({grid: true}))
+      .pipe(cleancss())
+      .pipe(gulp.dest('./docs/css/'))
+});
+
 gulp.task('static-copy', function() {
     gulp.src('./src/pic/*').pipe(gulp.dest('./docs/pic/'));
     gulp.src('./src/image/*').pipe(gulp.dest('./docs/image/'));
@@ -46,6 +55,14 @@ gulp.task('static-copy', function() {
     return;
 });
 
-gulp.task('default', ['randomizer-minify', 'serviceworker-minify', 'html-minify', 'static-copy'], function() {
+var tasks = [
+    'randomizer-minify',
+    'serviceworker-minify',
+    'html-minify',
+    'static-copy',
+    'css-minify'
+];
+
+gulp.task('default', tasks, function() {
     return;
 });
