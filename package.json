@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "GPRandomizer (C) Lenrok",
   "scripts": {
-    "start": "cd .. && GPRandomizer/node_modules/.bin/serve",
+    "start": "serve",
     "build": "gulp && git add docs && git ci docs -m 'gulp generated.'",
     "lint": "eslint src/serviceworker.js src/js/randomizer.js"
   },
@@ -20,6 +20,8 @@
     "child_process": "^1.0.2",
     "eslint": "^4.17.0",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-clean-css": "^3.9.2",
     "gulp-ejs": "^3.1.1",
     "gulp-htmlmin": "^4.0.0",
     "gulp-plumber": "^1.2.0",

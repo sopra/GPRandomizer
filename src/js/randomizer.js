@@ -115,18 +115,18 @@ window.addEventListener('load', function() {
   const BASTECH_NUM = 9;
   const ROUND_NUM = 6;
   const FINAL_NUM = 2;
-  const BOOSTER_PADDING_NUM = 6;
 
   // array shuffle method
   function shuffle(array) {
-    var n = array.length, t, i;
+    let narray = [].concat(array);
+    var n = narray.length, t, i;
     while (n) {
       i = Math.floor(Math.random() * n--);
-      t = array[n];
-      array[n] = array[i];
-      array[i] = t;
+      t = narray[n];
+      narray[n] = narray[i];
+      narray[i] = t;
     }
-    return array;
+    return narray;
   }
 
   //
@@ -244,33 +244,48 @@ window.addEventListener('load', function() {
   //
   function resizeMapVerticalGridLength() {
     let map = document.getElementById('map');
-    let wid = window.innerWidth;
+    let wid = map.clientWidth;
     let unit = (wid / 20) / 2;
     map.style.gridTemplateRows = (unit + 'px ').repeat(30);
     map.style.setProperty('-ms-grid-rows', (unit + 'px').repeat(30));
   }
 
   //
+  //
+  //
+  function addMapCss() {
+    if (!document.querySelector('[data-map-css]')) {
+      let mapcss = document.createElement('link');
+      mapcss.setAttribute('rel', 'stylesheet');
+      mapcss.setAttribute('href', './css/map.css');
+      mapcss.setAttribute('data-map-css', '');
+      document.getElementsByTagName('head')[0].appendChild(mapcss);
+    }
+  }
+
+  //
   // generate random map
   //
   function generateRandomMap(players) {
+    addMapCss();
     resizeMapVerticalGridLength();
-    if (2 == Number(players)) {
-      document.getElementById('mapTile9').style.display = 'none';
-    }
     let tiles = shuffle(SPACESECTORS[players]);
-    let i = 0;
-    Array.prototype.forEach.call(tiles, (tile) => {
-      if (players < 4 && (i == 2 || i == 6)) {
-        document.getElementById('mapTile' + i).style.display = 'none';
-        i++;
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-map]'),
+      function(element, index) {
+        let parentDiv = element.parentElement;
+        parentDiv.className = 'mapItem mapTile' + index + '-' + players + 'er';
+        let parentCss = parentDiv.currentStyle ||
+          document.defaultView.getComputedStyle(parentDiv, '');
+        if ('none' == parentCss.display) {
+          return true;
+        }
+
+        let degree = Math.floor(Math.random() * 6) * 60;
+        element.setAttribute('src', tiles.shift());
+        element.style.transform = 'rotate(' + degree + 'deg)';
       }
-      let degree = Math.floor(Math.random() * 6) * 60;
-      document.getElementById('mapTile' + i).style.display = 'block';
-      document.getElementById('map' + i).setAttribute('src', tile);
-      document.getElementById('map' + i).style.transform = 'rotate(' + degree + 'deg)';
-      i++;
-    });
+    );
   }
 
   //
@@ -317,11 +332,13 @@ window.addEventListener('load', function() {
   //
   //
   document.getElementById('hide').addEventListener('click', function() {
-    document.getElementsByTagName('menu')[0].style.display = 'none';
-    document.getElementById('mapGenMenu').style.display = 'none';
+    let menu = document.getElementsByTagName('menu')[0],
+      mapMenu = document.getElementById('mapGenMenu');
+    menu.style.display = 'none';
+    mapMenu.style.display = 'none';
     var l = document.getElementsByTagName('main')[0].addEventListener('click', function() {
-      document.getElementsByTagName('menu')[0].style.display = 'block';
-      document.getElementById('mapGenMenu').style.display = 'block';
+      menu.style.display = 'block';
+      mapMenu.style.display = 'block';
       document.getElementsByTagName('main')[0].removeEventListener('click', l);
     });
   });
@@ -331,11 +348,15 @@ window.addEventListener('load', function() {
     generateRandomMap(pNum);
   });
 
-  function rotateImage() {
+  function rotateImage(event) {
+    event.stopPropagation();
     let deg = this.style.transform.match(/rotate\(([0-9]+)deg\)/);
     let newdeg = 60;
     if (deg) {
       newdeg = Number(deg[1]) + 60;
+      if (newdeg >= 360) {
+        newdeg -= 360;
+      }
     }
     this.style.transform = 'rotate(' + newdeg + 'deg)';
   }
@@ -345,7 +366,7 @@ window.addEventListener('load', function() {
     function(image) {
       image.addEventListener('click', rotateImage);
     }
-  )
+  );
 
   let resizeQueue = null;
   let resizeWait = 300;
