@@ -338,8 +338,8 @@ window.addEventListener('load', function() {
     menu.style.display = 'none';
     mapMenu.style.display = 'none';
     var l = document.getElementsByTagName('main')[0].addEventListener('click', function() {
-      document.getElementsByTagName('menu')[0].style.display = 'block';
-      document.getElementById('mapGenMenu').style.display = 'block';
+      menu.style.display = 'block';
+      mapMenu.style.display = 'block';
       document.getElementsByTagName('main')[0].removeEventListener('click', l);
     });
   });
@@ -354,6 +354,9 @@ window.addEventListener('load', function() {
     let newdeg = 60;
     if (deg) {
       newdeg = Number(deg[1]) + 60;
+      if (newdeg >= 360) {
+        newdeg -= 360;
+      }
     }
     this.style.transform = 'rotate(' + newdeg + 'deg)';
   }
