@@ -348,7 +348,8 @@ window.addEventListener('load', function() {
     generateRandomMap(pNum);
   });
 
-  function rotateImage() {
+  function rotateImage(event) {
+    event.stopPropagation();
     let deg = this.style.transform.match(/rotate\(([0-9]+)deg\)/);
     let newdeg = 60;
     if (deg) {
