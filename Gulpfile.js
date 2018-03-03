@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglifyes'),
     plumber = require('gulp-plumber'),
     ejs = require('gulp-ejs'),
+    concat = require('gulp-concat'),
     htmlmin = require('gulp-htmlmin'),
     cleancss = require('gulp-clean-css'),
     autoprefix = require('gulp-autoprefixer'),
@@ -9,12 +10,19 @@ var gulp = require('gulp'),
     os = require('os'),
     uglify_option = {
         mangle: true,
+        output: {
+          'comments': '/^!/'
+        },
+        compress: {
+          'drop_console': true
+        },
         ecma: 6
     };
 
-gulp.task('randomizer-minify', function() {
-    return gulp.src('./src/js/randomizer.js')
+gulp.task('js-minify', function() {
+    return gulp.src('./src/js/*.js')
         .pipe(plumber())
+        .pipe(concat('randomizer.js'))
         .pipe(uglify(uglify_option))
         .pipe(gulp.dest('./docs/js/'));
 });
@@ -56,7 +64,7 @@ gulp.task('static-copy', function() {
 });
 
 var tasks = [
-    'randomizer-minify',
+    'js-minify',
     'serviceworker-minify',
     'html-minify',
     'static-copy',

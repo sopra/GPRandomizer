@@ -46,6 +46,7 @@
       font-size: 1.2em;
       font-family: sans-serif;
       margin: 5px;
+      overflow: scroll;
     }
     label#pNumLabel {
       font-size: inherit;
@@ -190,11 +191,14 @@
           <option value="4" selected>4</option>
         </select>
       </div>
-      <div >
+      <div>
         <button id="setup" type="button">setup</button>
       </div>
-      <div >
+      <div>
         <button id="hide" type="button">hide</button>
+      </div>
+      <div>
+        <button id="permalink" type="button">permalink</button>
       </div>
     </div>
   </menu>
@@ -202,46 +206,46 @@
     <section>
     <table id="GPBoard">
       <tr>
-        <td rowspan=2 class="terraformTech">
-          <img id="FED" src="">
+        <td rowspan="2" class="terraformTech">
+          <img data-generator-type="fed" id="FED" src="">
         </td>
         <td class="terraformTech">
-          <img id="ADV0" src="">
+          <img data-generator-type="adv" id="ADV0" src="">
         </td>
         <td class="navigationTech">
-          <img id="ADV1" src="">
+          <img data-generator-type="adv" id="ADV1" src="">
         </td>
         <td class="aiTech">
-          <img id="ADV2" src="">
+          <img data-generator-type="adv" id="ADV2" src="">
         </td>
         <td class="gaiaformTech">
-          <img id="ADV3" src="">
+          <img data-generator-type="adv" id="ADV3" src="">
         </td>
         <td class="economyTech">
-          <img id="ADV4" src="">
+          <img data-generator-type="adv" id="ADV4" src="">
         </td>
         <td class="scienceTech">
-          <img id="ADV5" src="">
+          <img data-generator-type="adv" id="ADV5" src="">
         </td>
       </tr>
       <tr>
         <td class="terraformTech">
-          <img id="BAS0" src="">
+          <img data-generator-type="bas" id="BAS0" src="">
         </td>
         <td class="navigationTech">
-          <img id="BAS1" src="">
+          <img data-generator-type="bas" id="BAS1" src="">
         </td>
         <td class="aiTech">
-          <img id="BAS2" src="">
+          <img data-generator-type="bas" id="BAS2" src="">
         </td>
         <td class="gaiaformTech">
-          <img id="BAS3" src="">
+          <img data-generator-type="bas" id="BAS3" src="">
         </td>
         <td class="economyTech">
-          <img id="BAS4" src="">
+          <img data-generator-type="bas" id="BAS4" src="">
         </td>
         <td class="scienceTech">
-          <img id="BAS5" src="">
+          <img data-generator-type="bas" id="BAS5" src="">
         </td>
       </tr>
       <tr>
@@ -252,65 +256,65 @@
           </p>
         </td>
         <td colspan="2" class="freeTech halfwidth">
-          <img id="BAS6" src="">
+          <img data-generator-type="bas" id="BAS6" src="">
         </td>
         <td colspan="2" class="freeTech halfwidth">
-          <img id="BAS7" src="">
+          <img data-generator-type="bas" id="BAS7" src="">
         </td>
         <td colspan="2" class="freeTech halfwidth">
-          <img id="BAS8" src="">
+          <img data-generator-type="bas" id="BAS8" src="">
         </td>
       </tr>
       <tr>
         <td rowspan=2 class="roundBG">
-          <img id="RND0" src="">
+          <img data-generator-type="rnd" id="RND0" src="">
         </td>
         <td rowspan=2 class="roundBG">
-          <img id="RND1" src="">
+          <img data-generator-type="rnd" id="RND1" src="">
         </td>
         <td rowspan=2 class="roundBG">
-          <img id="RND2" src="">
+          <img data-generator-type="rnd" id="RND2" src="">
         </td>
         <td rowspan=2 class="roundBG">
-          <img id="RND3" src="">
+          <img data-generator-type="rnd" id="RND3" src="">
         </td>
         <td rowspan=2 class="roundBG">
-          <img id="RND4" src="">
+          <img data-generator-type="rnd" id="RND4" src="">
         </td>
         <td rowspan=2 class="roundBG">
-          <img id="RND5" src="">
+          <img data-generator-type="rnd" id="RND5" src="">
         </td>
         <td class="finalScore">
-          <img id="FIN0" src="">
+          <img data-generator-type="fin" id="FIN0" src="">
         </td>
       </tr>
       <tr>
         <td class="finalScore">
-          <img id="FIN1" src="">
+          <img data-generator-type="fin" id="FIN1" src="">
         </td>
       </tr>
     </table>
     <div id="booster">
       <div class="booster">
-        <img id="BST0" src="">
+        <img data-generator-type="boo" id="BST0" src="">
       </div>
       <div class="booster">
-        <img id="BST1" src="">
+        <img data-generator-type="boo" id="BST1" src="">
       </div>
       <div class="booster">
-        <img id="BST2" src="">
+        <img data-generator-type="boo" id="BST2" src="">
       </div>
       <div class="booster">
-        <img id="BST3" src="">
+        <img data-generator-type="boo" id="BST3" src="">
       </div>
       <div class="booster">
-        <img id="BST4" src="">
+        <img data-generator-type="boo" id="BST4" src="">
       </div>
       <div class="booster">
-        <img id="BST5" src="">
+        <img data-generator-type="boo" id="BST5" src="">
       </div>
       <div class="booster">
-        <img id="BST6" src="">
+        <img data-generator-type="boo" id="BST6" src="">
       </div>
     </div>
     </section>
