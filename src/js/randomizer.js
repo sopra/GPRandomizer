@@ -35,6 +35,16 @@ GPRandomizer.BoardState = {
       'FIN=' + this.finalScores.join(',') + '&' +
       'BOO=' + this.roundBoosters.join(',');
     return hbString;
+  },
+
+  clearBoardState: function() {
+    this.players = '';
+    this.federation = '';
+    this.advancedTechs = [];
+    this.basicTechs = [];
+    this.roundScores = [];
+    this.finalScores = [];
+    this.roundBoosters = [];
   }
 };
 
@@ -384,6 +394,8 @@ window.addEventListener('load', function() {
     if (hashbang == true && location.hash) {
       args = parseHashbang(location.hash);
     }
+
+    GPRandomizer.BoardState.clearBoardState();
 
     if (args.PLAYERS) {
       GPRandomizer.Menu.players(args.PLAYERS);
