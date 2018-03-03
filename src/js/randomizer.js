@@ -1,3 +1,67 @@
+const GPRandomizer = {};
+
+//
+// Menu Select
+//
+GPRandomizer.Menu = {
+
+  id: 'pNumbers',
+
+  players: function(p) {
+    if (p && p > 1 && p < 5) {
+      console.debug('[GPRandomizer.Menu.players]', 'p =>', p);
+      document.getElementById(this.id).value = p;
+    }
+    return document.getElementById(this.id).value;
+  }
+};
+
+GPRandomizer.BoardState = {
+  players: '',
+  federation: '',
+  advancedTechs: [],
+  basicTechs: [],
+  roundScores: [],
+  finalScores: [],
+  roundBoosters: [],
+  map: [],
+  toHashbangString: function() {
+    let hbString = '#!' +
+      'PLAYERS=' + this.players + '&' +
+      'FED=' + this.federation + '&' + 
+      'ADV=' + this.advancedTechs.join(',') + '&' +
+      'BAS=' + this.basicTechs.join(',') + '&' +
+      'RND=' + this.roundScores.join(',') + '&' +
+      'FIN=' + this.finalScores.join(',') + '&' +
+      'BOO=' + this.roundBoosters.join(',');
+    return hbString;
+  }
+};
+
+GPRandomizer.Map = {
+
+  boardId: 'map',
+
+  setPreset: function(preset) {
+    console.debug('[GPRandomizer.Map.setPreset]', 'preset =>', preset);
+  },
+
+  generatePresetMap: function(players) {
+    console.debug('[GPRandomizer.Map.generatePresetMap]', 'players =>', players);
+  },
+
+  generateRandomMap: function(players) {
+    console.debug('[GPRandomizer.Map.generateRandomMap]', 'players =>', players);
+  },
+
+  resizeMapVerticalGridLength: function() {
+    let map = document.getElementById(this.boardId);
+    let unit = (map.clientWidth / 20) / 2;
+    map.style.gridTemplateRows = (unit + 'px ').repeat(30);
+    map.style.setProperty('-ms-grid-rows', (unit + 'px').repeat(30));
+  }
+};
+
 window.addEventListener('load', function() {
 
   const UA = navigator.userAgent;
@@ -111,22 +175,24 @@ window.addEventListener('load', function() {
     ]
   };
 
-  const ADVTECH_NUM = 6;
-  const BASTECH_NUM = 9;
-  const ROUND_NUM = 6;
-  const FINAL_NUM = 2;
-
+  //
   // array shuffle method
-  function shuffle(array) {
-    let narray = [].concat(array);
-    var n = narray.length, t, i;
+  //
+  function shuffle(list, preset) {
+    if (preset && preset.length > 0) {
+      return preset.map(function(value) {
+        return list[value];
+      });
+    }
+    let nlist = [].concat(list);
+    var n = nlist.length, t, i;
     while (n) {
       i = Math.floor(Math.random() * n--);
-      t = narray[n];
-      narray[n] = narray[i];
-      narray[i] = t;
+      t = nlist[n];
+      nlist[n] = nlist[i];
+      nlist[i] = t;
     }
-    return narray;
+    return nlist;
   }
 
   //
@@ -141,117 +207,109 @@ window.addEventListener('load', function() {
     }
 
     document.getElementById('FED').setAttribute('src', FEDERATIONS[fed]);
+    GPRandomizer.BoardState.federation = fed;
   }
 
   //
   // setup advanced Technology;
   //
   function setupAdvTech(args) {
-    var advlist = shuffle(ADVANCEDTECHS);
-    for (var i = 0; i < ADVTECH_NUM; i++) {
-      document.getElementById('ADV' + i).setAttribute('src', advlist[i]);
-    }
+    var preset = args ? args.split(',') : [];
+    var advlist = shuffle(ADVANCEDTECHS, preset);
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-generator-type="adv"]'),
+      function(e, i) {
+        e.setAttribute('src', advlist[i]);
+        GPRandomizer.BoardState.advancedTechs.push(
+          ADVANCEDTECHS.indexOf(advlist[i])
+        );
+      }
+    );
   }
 
   //
   // setup basic Tech
   //
   function setupBasicTech(args) {
-    var baslist = shuffle(BASICTECHS);
-    for (var i = 0; i < BASTECH_NUM; i++) {
-      document.getElementById('BAS' + i).setAttribute('src', baslist[i]);
-    }
-  }
-
-  //
-  //
-  //
-  function parseHashbang(hashbang_str) {
-    var hashes = hashbang_str.split('&');
-    var vars = {};
-
-    for(var i = 0; i < hashes.length; i++) {
-      var hash = hashes[i].split('=');
-
-      if(hash.length > 1) {
-        vars[hash[0]] = hash[1];
-      } else {
-        vars[hash[0]] = null;
+    var preset = args ? args.split(',') : []; 
+    var baslist = shuffle(BASICTECHS, preset);
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-generator-type="bas"]'),
+      function(e, i) {
+        e.setAttribute('src', baslist[i]);
+        GPRandomizer.BoardState.basicTechs.push(
+          BASICTECHS.indexOf(baslist[i])
+        );
       }
-    }
-
-    return vars;
+    );
   }
 
   //
   // setup RoundScore
   //
   function setupRoundScore(args) {
-    var rndlist = shuffle(ROUNDSCORES);
-    for (var i = 0; i < ROUND_NUM; i++) {
-      document.getElementById('RND' + i).setAttribute('src', rndlist[i]);
-    }
+    let preset = args ? args.split(',') : [];
+    let rndlist = shuffle(ROUNDSCORES, preset);
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-generator-type="rnd"]'),
+      function(e, i) {
+        e.setAttribute('src', rndlist[i]);
+        GPRandomizer.BoardState.roundScores.push(
+          ROUNDSCORES.indexOf(rndlist[i])
+        );
+      }
+    );
   }
 
   //
   // setup FinalScore
   //
   function setupFinalScore(args) {
-    var finlist = shuffle(FINALSCORES);
-    for (var i = 0; i < FINAL_NUM; i++) {
-      document.getElementById('FIN' + i).setAttribute('src', finlist[i]);
-    }
+    let preset = args ? args.split(',') : [];
+    let finlist = shuffle(FINALSCORES, preset);
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-generator-type="fin"]'),
+      function(e, i) {
+        e.setAttribute('src', finlist[i]);
+        GPRandomizer.BoardState.finalScores.push(
+          FINALSCORES.indexOf(finlist[i])
+        );
+      }
+    );
   }
 
   //
   // setup Booster
   //
   function setupBooster(args) {
+    let preset = args ? args.split(',') : [];
     let boosterdiv = document.getElementById('booster');
-    let players = document.getElementById('pNumbers').value;
-    let rndBoosterNum = Number(players) + 3;
-    let rndboosterlist = shuffle(ROUNDBOOSTERS);
-    if (boosterdiv.childElementCount != rndBoosterNum) {
-      Array.prototype.forEach.call(
-        document.getElementsByClassName('booster'),
-        function(element) {
-          element.style.display = 'none';
+    let players = Number(GPRandomizer.Menu.players());
+    let rndBoosterNum = players + 3;
+    let rndboosterlist = shuffle(ROUNDBOOSTERS, preset);
+    boosterdiv.style.setProperty('grid-template-columns', "1fr ".repeat(rndBoosterNum));
+    boosterdiv.style.setProperty('-ms-grid-columns', "1fr ".repeat(rndBoosterNum));
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-generator-type="boo"]'),
+      function(e, i) {
+        if (rndBoosterNum <= i) {
+          e.parentElement.style.display = 'none';
+          return true;
         }
-      );
-    }
-    boosterdiv.style.setProperty(
-      'grid-template-columns', "1fr ".repeat(rndBoosterNum)
+
+        e.parentElement.style.setProperty('-ms-grid-column', i + 1);
+        e.parentElement.style.display = 'block';
+        e.parentElement.className = 'booster booster' + players + 'er';
+        e.setAttribute('src', rndboosterlist[i]);
+        GPRandomizer.BoardState.roundBoosters.push(
+          ROUNDBOOSTERS.indexOf(rndboosterlist[i])
+        );
+      }
     );
-    boosterdiv.style.setProperty(
-      '-ms-grid-columns', "1fr ".repeat(rndBoosterNum)
-    );
-    for (var i = 0; i < rndBoosterNum; i++) {
-      let bItem = document.getElementById('BST' + i);
-      bItem.setAttribute('src', rndboosterlist[i]);
-      bItem.parentElement.style.setProperty('-ms-grid-column', i + 1);
-      bItem.parentElement.style.display = 'block';
-      Array.prototype.forEach.call(bItem.parentElement.classList, function(item) {
-        if (5 < item.lastIndexOf('er')) {
-          bItem.parentElement.classList.remove(item);
-        }
-      });
-      bItem.parentElement.classList.add('booster' + players + 'er');
-    }
   }
 
   //
-  // map vertical grid resize
-  //
-  function resizeMapVerticalGridLength() {
-    let map = document.getElementById('map');
-    let wid = map.clientWidth;
-    let unit = (wid / 20) / 2;
-    map.style.gridTemplateRows = (unit + 'px ').repeat(30);
-    map.style.setProperty('-ms-grid-rows', (unit + 'px').repeat(30));
-  }
-
-  //
-  //
+  // add external css for map
   //
   function addMapCss() {
     if (!document.querySelector('[data-map-css]')) {
@@ -266,9 +324,12 @@ window.addEventListener('load', function() {
   //
   // generate random map
   //
-  function generateRandomMap(players) {
+  function generateRandomMap(players, preset) {
     addMapCss();
-    resizeMapVerticalGridLength();
+    GPRandomizer.Map.resizeMapVerticalGridLength();
+    if (preset) {
+      console.log(preset);
+    }
     let tiles = shuffle(SPACESECTORS[players]);
     Array.prototype.forEach.call(
       document.querySelectorAll('[data-map]'),
@@ -289,36 +350,66 @@ window.addEventListener('load', function() {
   }
 
   //
+  //
+  //
+  function parseHashbang(hashbang_str) {
+    console.debug('[parseHashbang]', 'Start');
+
+    var hashes = hashbang_str.slice(hashbang_str.indexOf('#!') + 2).split('&');
+    var vars = {};
+
+    for(var i = 0; i < hashes.length; i++) {
+      var hash = hashes[i].split('=');
+
+      if(hash.length > 1) {
+        vars[hash[0]] = hash[1];
+      } else {
+        vars[hash[0]] = null;
+      }
+    }
+
+    console.debug('[parseHashbang]', vars);
+    return vars;
+  }
+
+  //
   // setup function
   //
   function setup(hashbang) {
     var args = {};
-    if (hashbang == true) {
-      (function () {
-        const aURL = window.location.href;
-        if (aURL.indexOf('#!') >= 0) {
-          args = parseHashbang(aURL.slice(aURL.indexOf('#!') + 2));
-        }
-      }());
+    if (hashbang == true && location.hash) {
+      args = parseHashbang(location.hash);
     }
 
+    if (args.PLAYERS) {
+      GPRandomizer.Menu.players(args.PLAYERS);
+    }
+    GPRandomizer.BoardState.players = GPRandomizer.Menu.players();
+
     // setupFed
-    setupFederation(args['FED']);
+    setupFederation(args.FED);
 
     // setup advanced-tech
-    setupAdvTech(args);
+    setupAdvTech(args.ADV);
 
     // setup basic-tech
-    setupBasicTech(args);
+    setupBasicTech(args.BAS);
 
     // setup round-score
-    setupRoundScore(args);
+    setupRoundScore(args.RND);
 
     // setup final-score
-    setupFinalScore(args);
+    setupFinalScore(args.FIN);
 
     // setup round-booster
-    setupBooster(args);
+    setupBooster(args.BOO);
+
+    if (args.MAP) {
+      generateRandomMap(
+        GPRandomizer.Menu.players(),
+        args.MAP
+      );
+    }
   }
 
   //
@@ -343,11 +434,27 @@ window.addEventListener('load', function() {
     });
   });
 
-  document.getElementById('mapGen').addEventListener('click', function() {
-    let pNum = document.getElementById('pNumbers').value;
-    generateRandomMap(pNum);
+  //
+  //
+  //
+  document.getElementById('permalink').addEventListener('click', function() {
+    console.debug(GPRandomizer.BoardState);
+    let newUrl = location.origin + location.pathname + GPRandomizer.BoardState.toHashbangString();
+    if (window.history) {
+      window.history.pushState(null, null, newUrl);
+    }
   });
 
+  //
+  //
+  //
+  document.getElementById('mapGen').addEventListener('click', function() {
+    generateRandomMap(GPRandomizer.Menu.players());
+  });
+
+  //
+  //
+  //
   function rotateImage(event) {
     event.stopPropagation();
     let deg = this.style.transform.match(/rotate\(([0-9]+)deg\)/);
@@ -373,7 +480,7 @@ window.addEventListener('load', function() {
   window.addEventListener('resize', function() {
     clearTimeout(resizeQueue);
     resizeQueue = setTimeout(function() {
-      resizeMapVerticalGridLength();
+      GPRandomizer.Map.resizeMapVerticalGridLength();
     }, resizeWait);
   });
 
