@@ -38,6 +38,10 @@ GPRandomizer.BoardState = {
   }
 };
 
+GPRandomizer.Board = {};
+
+GPRandomizer.Board.Federation = {};
+
 GPRandomizer.Map = {
 
   boardId: 'map',
@@ -443,6 +447,20 @@ window.addEventListener('load', function() {
     if (window.history) {
       window.history.pushState(null, null, newUrl);
     }
+    (function() {
+      let inputElement = document.createElement('pre');
+      inputElement.style.display = 'inline-block';
+      inputElement.style.width = 0;
+      inputElement.style.height = 0;
+      inputElement.innerText = newUrl;
+      document.querySelector('div.header').appendChild(inputElement);
+      let range = document.createRange();
+      range.selectNode(inputElement);
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      document.querySelector('div.header').removeChild(inputElement);
+      alert('Copy permalink to clipboard');
+    })();
   });
 
   //
