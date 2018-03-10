@@ -3,54 +3,59 @@ const GPRandomizer = {};
 //
 // Menu Select
 //
-GPRandomizer.Menu = {
+GPRandomizer.Menu = (function(){
 
-  id: 'pNumbers',
+  let id = 'pNumbers';
 
-  players: function(p) {
-    if (p && p > 1 && p < 5) {
-      console.debug('[GPRandomizer.Menu.players]', 'p =>', p);
-      document.getElementById(this.id).value = p;
+  return {
+    players: function(p) {
+      if (p && p > 1 && p < 5) {
+        console.debug('[GPRandomizer.Menu.players]', 'p =>', p);
+        document.getElementById(id).value = p;
+      }
+      return document.getElementById(id).value;
     }
-    return document.getElementById(this.id).value;
-  }
-};
+  };
+})();
 
-GPRandomizer.BoardState = {
-  players: '',
-  federation: '',
-  advancedTechs: [],
-  basicTechs: [],
-  roundScores: [],
-  finalScores: [],
-  roundBoosters: [],
-  map: [],
-  toHashbangString: function() {
-    let hbString = '#!' +
-      'PLAYERS=' + this.players + '&' +
-      'FED=' + this.federation + '&' + 
-      'ADV=' + this.advancedTechs.join(',') + '&' +
-      'BAS=' + this.basicTechs.join(',') + '&' +
-      'RND=' + this.roundScores.join(',') + '&' +
-      'FIN=' + this.finalScores.join(',') + '&' +
-      'BOO=' + this.roundBoosters.join(',');
-    return hbString;
-  },
+GPRandomizer.BoardState = (function () {
 
-  clearBoardState: function() {
-    this.players = '';
-    this.federation = '';
-    this.advancedTechs = [];
-    this.basicTechs = [];
-    this.roundScores = [];
-    this.finalScores = [];
-    this.roundBoosters = [];
-  }
-};
+  return {
+    players: '',
+    federation: '',
+    advancedTechs: [],
+    basicTechs: [],
+    roundScores: [],
+    finalScores: [],
+    roundBoosters: [],
+    map: [],
 
-GPRandomizer.Board = {};
+    toHashbangString: function () {
+      let hbString = '#!' + [
+        'PLAYERS=' + this.players,
+        'FED=' + this.federation,
+        'ADV=' + this.advancedTechs.join(','),
+        'BAS=' + this.basicTechs.join(','),
+        'RND=' + this.roundScores.join(','),
+        'FIN=' + this.finalScores.join(','),
+        'BOO=' + this.roundBoosters.join(','),
+        'MAP=' + this.map.join(','),
+      ].join('&');
+      return hbString;
+    },
 
-GPRandomizer.Board.Federation = {};
+    clearBoardState: function () {
+      this.players = '';
+      this.federation = '';
+      this.advancedTechs = [];
+      this.basicTechs = [];
+      this.roundScores = [];
+      this.finalScores = [];
+      this.roundBoosters = [];
+      this.map = [];
+    }
+  };
+})();
 
 GPRandomizer.Map = {
 
@@ -341,24 +346,38 @@ window.addEventListener('load', function() {
   function generateRandomMap(players, preset) {
     addMapCss();
     GPRandomizer.Map.resizeMapVerticalGridLength();
+    let presetTiles;
+    let presetDegree; 
+    let ignoreSpace = {
+      "2": [2, 6, 9],
+      "3": [2, 6],
+      "4": []
+    };
     if (preset) {
-      console.log(preset);
+      console.log('[generateRandomMap]', 'preset=', preset);
+      let args = preset.split(',');
+      presetTiles = args.filter(function(value, index) {return (index % 2) == 0;});
+      presetDegree = args.filter(function(value, index) {return (index % 2) == 1;});
+      console.log('[generateRandomMap]', 'presetTiles=', presetTiles);
+      console.log('[generateRandomMap]', 'presetDegree=', presetDegree);
     }
-    let tiles = shuffle(SPACESECTORS[players]);
+    let tiles = shuffle(SPACESECTORS[players], presetTiles);
     Array.prototype.forEach.call(
-      document.querySelectorAll('[data-map]'),
+      document.querySelectorAll('img[data-generator-type="map"]'),
       function(element, index) {
-        let parentDiv = element.parentElement;
-        parentDiv.className = 'mapItem mapTile' + index + '-' + players + 'er';
-        let parentCss = parentDiv.currentStyle ||
-          document.defaultView.getComputedStyle(parentDiv, '');
-        if ('none' == parentCss.display) {
+        element.parentElement.className = 'mapItem mapTile' + index + '-' + players + 'er';
+        if (-1 != ignoreSpace[players].indexOf(index)) {
           return true;
         }
-
         let degree = Math.floor(Math.random() * 6) * 60;
-        element.setAttribute('src', tiles.shift());
+        let tile = tiles.shift();
+        if (presetDegree) {
+          degree = presetDegree.shift();
+        }
+        element.setAttribute('src', tile);
+        element.setAttribute('data-map-index', index);
         element.style.transform = 'rotate(' + degree + 'deg)';
+        GPRandomizer.BoardState.map.push(SPACESECTORS[players].indexOf(tile), degree);
       }
     );
   }
@@ -489,6 +508,7 @@ window.addEventListener('load', function() {
     event.stopPropagation();
     let deg = this.style.transform.match(/rotate\(([0-9]+)deg\)/);
     let newdeg = 60;
+    let index = this.getAttribute('data-map-index');
     if (deg) {
       newdeg = Number(deg[1]) + 60;
       if (newdeg >= 360) {
@@ -496,6 +516,7 @@ window.addEventListener('load', function() {
       }
     }
     this.style.transform = 'rotate(' + newdeg + 'deg)';
+    GPRandomizer.BoardState.map[index * 2] = newdeg;
   }
 
   Array.prototype.forEach.call(
