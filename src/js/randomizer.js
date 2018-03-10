@@ -375,6 +375,7 @@ window.addEventListener('load', function() {
           degree = presetDegree.shift();
         }
         element.setAttribute('src', tile);
+        element.setAttribute('data-map-index', index);
         element.style.transform = 'rotate(' + degree + 'deg)';
         GPRandomizer.BoardState.map.push(SPACESECTORS[players].indexOf(tile), degree);
       }
