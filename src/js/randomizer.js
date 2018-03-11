@@ -535,5 +535,86 @@ window.addEventListener('load', function() {
     }, resizeWait);
   });
 
+  let t, x, y, origX, origY;
+
+  document.getElementById('mineGen').addEventListener('click', function(event) {
+
+    function onMouseMove(event) {
+      console.log(event);
+      let e = event;
+      if (event.type !== "mousemove") {
+        e = event.changedTouches[0];
+      }
+      console.log(e.pageY);
+      console.log(y);
+      console.log(t.style.top.replace(/px/, ''));
+      t.style.top = origY + (e.pageY - y) + "px";
+      t.style.left = origX + (e.pageX - x) + "px";
+    }
+
+    console.log(event);
+    let mime = document.createElement('img');
+    let timer, moveFlag = false, index = 0;
+    let srcList = [
+      'pic/blue_mine.svg',
+      'pic/red_mine.svg',
+      'pic/orange_mine.svg',
+      'pic/yello_mine.svg',
+      'pic/brown_mine.svg',
+      'pic/gray_mine.svg',
+      'pic/white_mine.svg'
+    ];
+
+    function onMouseStart(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      t = mime;
+      if (e.type == 'mousedown') {
+        x = e.pageX;
+        y = e.pageY;
+      } else {
+        x = e.changedTouches[0].pageX;
+        y = e.changedTouches[0].pageY;
+      }
+      origX = Number(t.style.left.replace(/px/, ''));
+      origY = Number(t.style.top.replace(/px/, ''));
+      timer = setTimeout(function() {
+        moveFlag = true;
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('touchmove', onMouseMove);
+      }, 100);
+    }
+
+    function onMouseEnd(e) {
+      clearTimeout(timer);
+      if (moveFlag === false) {
+        index++;
+        if (index >= srcList.length) {
+          index = 0;
+        }
+        t.setAttribute('src', srcList[index]);
+      }
+      moveFlag = false;
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('touchmove', onMouseMove);
+    }
+
+    mime.setAttribute('src', srcList[index]);
+    mime.style.position = "relative";
+    mime.style.width = (document.getElementById('map').clientWidth / 20 / 1.5)  + "px";
+    mime.style.top = 0 + "px";
+    mime.style.left = 0 + "px";
+    mime.style.msGridColumn = "1";
+    mime.style.msGridRow = "1";
+    mime.style.gridColumn = "1";
+    mime.style.gridRow = "1";
+    document.getElementById('map').appendChild(mime);
+
+    mime.addEventListener('mousedown', onMouseStart);
+    mime.addEventListener('touchstart', onMouseStart, {passive: false});
+    mime.addEventListener('mouseup', onMouseEnd);
+    mime.addEventListener('touchend', onMouseEnd);
+  });
+
   setup(true);
 });
