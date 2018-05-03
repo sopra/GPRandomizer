@@ -1,34 +1,27 @@
-# GaiaProject Setup Randomzier
+# gprandomizer
 
-Randomizer to setup [GaiaProject](https://boardgamegeek.com/boardgame/220308/gaia-project).
+> Setup Randomizer for GaiaProject
 
-## Usage
+## Build Setup
 
-Access to https://sopra.github.io/GPRandomizer/
+``` bash
+# install dependencies
+npm install
 
-Choose Player number and click "setup" button.
+# serve with hot reload at localhost:8080
+npm run dev
 
-If you want to share board, click "hide" button and capture screenshot.
+# build for production with minification
+npm run build
 
-(and board shows again if you click board.)
+# build for production and view the bundle analyzer report
+npm run build --report
 
-## Permalink Parameter Spec
+# run unit tests
+npm run unit
 
-variable | value type | sample value | value spec | description
----|---|---|---|---
-PLAYERS | integer | 4 | 2-4 | Player number.
-FED | integer | 0 | 0-6 | Federation Tile index.
-ADV | integers (comma separated) | 0,1,2,3,4,5 | 0-14 | Advanced Technology Tile.  Order is left to right.(from Terraforming Tech to Science Tech)
-BAS | integers (comma separated) | 0,1,2,3,4,5,6,7,8 | 0-8 | Basic Technology Tile.  Order is left to right (from Terraforming Tech to Science Tech).  last 3 number is Free Technology.
-RND | integers (comma separated) | 0,1,2,3,4,5 | 0-9 | Round Tile.  Order is left to right (Round 1 to Round 6).
-FIN | integers (comma separated) | 0,1 | 0-5 | Final Score Tile.
-BOO | integers (comma separated) | 0,1,2,3,4,5 | 0-9 | Round Booster Tile. if 2 players, you have to input at least 5 values. Ofcourse if 4 players, you have to input at least 7 values. It is ignored the number over range.
-MAP | integers (comma separated) | 0,0,1,60,2,120,...| (odd-index) Map Tile Number.<br>(even-index) tile's degree. It MUST be a following number\[0, 60, 120, 180, 240, 300\]. | \[TileNumber, TileDegree],\[TileNumber, TileDegree\]...<br>Ignore 9Tile or later when 3Player Board. Also ignore 8Tile or later when 2Player.
+# run all tests
+npm test
+```
 
-## Copyright
-
-Design and Images.
-(c) [Lenrok](https://boardgamegeek.com/filepage/157134/gaia-project-setup-randomizer-gprandomizer)
-
-Randomizer scripts.
-(c) [sopra](https://github.com/sopra/)
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
