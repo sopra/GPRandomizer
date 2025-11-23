@@ -19,15 +19,15 @@ var gulp = require('gulp'),
         ecma: 6
     };
 
-gulp.task('js-minify', function() {
+function jsMinify() {
     return gulp.src('./src/js/*.js')
         .pipe(plumber())
         .pipe(concat('randomizer.js'))
         .pipe(uglify(uglify_option))
         .pipe(gulp.dest('./docs/js/'));
-});
+}
 
-gulp.task('serviceworker-minify', function() {
+function serviceworkerMinify() {
     var revision = execSync('git rev-parse HEAD').toString().replace(os.EOL, '');
 
     return gulp.src('./src/serviceworker.js')
@@ -35,9 +35,9 @@ gulp.task('serviceworker-minify', function() {
         .pipe(ejs({ "revision": revision }))
         .pipe(uglify(uglify_option))
         .pipe(gulp.dest('./docs/'));
-});
+}
 
-gulp.task('html-minify', function() {
+function htmlMinify() {
     return gulp.src('./src/index.html')
         .pipe(htmlmin({
           "html5": true,
@@ -46,31 +46,39 @@ gulp.task('html-minify', function() {
           "minifyJS": true
         }))
         .pipe(gulp.dest('./docs/'));
-});
+}
 
-gulp.task('css-minify', function() {
-    gulp.src('./src/css/*.css')
+function cssMinify() {
+    return gulp.src('./src/css/*.css')
       .pipe(autoprefix({grid: true}))
       .pipe(cleancss())
-      .pipe(gulp.dest('./docs/css/'))
-});
+      .pipe(gulp.dest('./docs/css/'));
+}
 
-gulp.task('static-copy', function() {
-    gulp.src('./src/pic/*').pipe(gulp.dest('./docs/pic/'));
-    gulp.src('./src/image/*').pipe(gulp.dest('./docs/image/'));
-    gulp.src('./src/manifest.json').pipe(gulp.dest('./docs/'));
-    gulp.src('./src/favicon.ico').pipe(gulp.dest('./docs/'));
-    return;
-});
+function copyPic() {
+    return gulp.src('./src/pic/*').pipe(gulp.dest('./docs/pic/'));
+}
 
-var tasks = [
-    'js-minify',
-    'serviceworker-minify',
-    'html-minify',
-    'static-copy',
-    'css-minify'
-];
+function copyImage() {
+    return gulp.src('./src/image/*').pipe(gulp.dest('./docs/image/'));
+}
 
-gulp.task('default', tasks, function() {
-    return;
-});
+function copyManifest() {
+    return gulp.src('./src/manifest.json').pipe(gulp.dest('./docs/'));
+}
+
+function copyFavicon() {
+    return gulp.src('./src/favicon.ico').pipe(gulp.dest('./docs/'));
+}
+
+var staticCopy = gulp.parallel(copyPic, copyImage, copyManifest, copyFavicon);
+
+var build = gulp.parallel(
+    jsMinify,
+    serviceworkerMinify,
+    htmlMinify,
+    staticCopy,
+    cssMinify
+);
+
+exports.default = build;

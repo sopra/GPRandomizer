@@ -49,7 +49,5 @@ The project uses `gulp` to process files from `src/` to `docs/`.
 - **Always edit `src/` files**, never `docs/` files.
 - **Run `npm run build`** after making changes to `src/` to update the production build.
 - **Respect the "No Framework" constraint**. Do not introduce React, Vue, or other heavy libraries.
+- **Respect the "No Framework" constraint**. Do not introduce React, Vue, or other heavy libraries.
 
-## Known Issues
-- **Build Fails on Node 12+**: The project uses Gulp 3.9.1, which depends on `graceful-fs` and `natives`. This combination fails on Node.js 12 and newer (including Node 22).
-    - **Workaround**: Use a legacy Node.js version (e.g., v10) to run the build, or consider upgrading Gulp to v4 (requires code changes in `Gulpfile.js`).

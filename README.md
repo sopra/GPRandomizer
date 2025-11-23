@@ -13,7 +13,7 @@ This project is a challenge to develop a web system using Vanilla JavaScript wit
 ## Development
 
 ### Prerequisites
-- Node.js (Legacy version required, e.g., v10 or v11, due to Gulp 3 dependency)
+- Node.js
 - npm
 
 ### Installation
